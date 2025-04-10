@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="page-content">
+		<!-- inner page banner -->
+		<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url('{% static 'images/background/bg3.jpg' %}');">
+			<div class="container">
+				<div class="dz-bnr-inr-entry">
+					<h1>Wishlist</h1>
+					<nav aria-label="breadcrumb" class="breadcrumb-row">
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{% static 'index' %}"> Home</a></li>
+							<li class="breadcrumb-item">Wishlist</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!-- inner page banner End-->
+		<div class="content-inner-1">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="table-responsive">
+							<table class="table check-tbl">
+									<thead>
+										<tr>
+											<th>Produit</th>
+											<th>Nom du produit</th>
+											<th>Prix</th>
+											<th>Quantité</th>
+											<th>Ajouter au panier</th>
+											<th>Retirer</th>
+										</tr>
+									</thead>
+								<tbody>
+									{% for item in wishlist_items %}
+									<tr>
+										<td class="product-item-img"><img src="{{ item.livre.couverture.url }}" alt="{{ item.livre.titre }}"></td>
+										<td class="product-item-name">{{ item.livre.titre }}</td>
+										<td class="product-item-price">{{ item.livre.prix }} FCFA</td>
+										<td class="product-item-quantity">
+											<div class="quantity btn-quantity style-1 me-3">
+												<input type="text" value="1" name="quantity_{{ item.livre.id }}"/>
+											</div>
+										</td>
+										<td class="product-item-totle"><a href="{% url 'e_commerce:add-to-cart' item.livre.id %}" class="btn btn-primary btnhover">Add To Cart</a></td>
+										<td class="product-item-close"><a href="{% url 'e_commerce:remove_from_wishlist' item.livre.id %}" class="ti-close"></a></td>
+									</tr>
+									{% empty %}
+									<tr>
+										<td colspan="6">Votre wishlist est vide.</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
