@@ -36,6 +36,21 @@ def article_detail(request, slug):
         'commentaires': commentaires_principaux
     })
 
+# ==============================
+# 📝 Pages Blog
+# ==============================
+
+def blog_detail(request):
+    return render(request, 'blog/blog-detail.html')
+
+def blog_grid_left_sidebar(request):
+    return render(request, 'blog/blog-grid-left-sidebar.html')
+
+def blog_grid_no_sidebar(request):
+    return render(request, 'blog/blog-grid-no-sidebar.html')
+
+def single_post(request):
+    return render(request, 'blog/single-post.html')
 
 @login_required
 def add_comment(request, article_slug):

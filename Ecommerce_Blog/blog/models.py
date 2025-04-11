@@ -40,15 +40,18 @@ class Article(models.Model):
         verbose_name_plural = "Articles"
 
     titre = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
-    couverture = models.ImageField(upload_to="articles/", blank=True)
+    couverture = models.ImageField(upload_to="articles/")
     resume = models.TextField(blank=True)
     contenu = RichTextField()
-    auteur_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="articles")
-    categorie_id = models.ForeignKey(Categorie, on_delete=models.SET_NULL, null=True, related_name="articles")
-    tag_ids = models.ManyToManyField(Tag, blank=True, related_name="articles")
+
+    auteur_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="auteur_article_ids")
+    categorie_id = models.ForeignKey(Categorie, on_delete=models.SET_NULL, null=True, related_name="categorie_article_ids", verbose_name="Catégorie")
+    tag_ids = models.ManyToManyField(Tag, blank=True, related_name="tag_article_ids", verbose_name="Tags")
+
+    est_publie = models.BooleanField(default=False)
     livre_associe_id = models.ForeignKey('e_commerce.Livre', on_delete=models.SET_NULL, null=True, blank=True)
     date_de_publication = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(default="",unique=True, blank=True)
 
     # Standards
     statut = models.BooleanField(default=True)
@@ -65,10 +68,6 @@ class Article(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
-
-    @property
-    def est_publie(self):
-        return self.date_de_publication <= timezone.now()
 
     def __str__(self):
         return self.titre

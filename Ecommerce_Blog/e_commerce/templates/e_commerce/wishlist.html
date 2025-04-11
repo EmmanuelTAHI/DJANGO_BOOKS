@@ -36,7 +36,7 @@
 									</thead>
 								<tbody>
 									{% for item in wishlist_items %}
-									<tr>
+									<tr data-livre-id="{{ items.livre.id }}">
 										<td class="product-item-img"><img src="{{ item.livre.couverture.url }}" alt="{{ item.livre.titre }}"></td>
 										<td class="product-item-name">{{ item.livre.titre }}</td>
 										<td class="product-item-price">{{ item.livre.prix }} FCFA</td>
@@ -45,8 +45,8 @@
 												<input type="text" value="1" name="quantity_{{ item.livre.id }}"/>
 											</div>
 										</td>
-										<td class="product-item-totle"><a href="{% url 'e_commerce:add-to-cart' item.livre.id %}" class="btn btn-primary btnhover">Add To Cart</a></td>
-										<td class="product-item-close"><a href="{% url 'e_commerce:remove_from_wishlist' item.livre.id %}" class="ti-close"></a></td>
+										<td class="product-item-totle"><a href="{% url 'e_commerce:add-to-cart' item.livre.id %}" class="btn btn-primary btnhover add-to-cart-btn" data-livre-id="{{ item.livre.id }}">Add To Cart</a></td>
+										<td class="product-item-close"><a href="{% url 'e_commerce:remove-from-wishlist' item.livre.id %}" class="ti-close"></a></td>
 									</tr>
 									{% empty %}
 									<tr>

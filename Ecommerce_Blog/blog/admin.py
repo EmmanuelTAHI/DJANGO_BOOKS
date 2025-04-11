@@ -19,7 +19,7 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('titre', 'auteur_id', 'categorie_id', 'date_de_publication', 'est_publie', 'statut', 'created_at')
-    list_filter = ('statut', 'date_de_publication', 'categorie_id')
+    list_filter = ('statut', 'date_de_publication', 'categorie_id', 'est_publie')
     search_fields = ('titre', 'resume', 'contenu')
     prepopulated_fields = {'slug': ('titre',)}  # Auto-remplit le slug à partir du titre
     raw_id_fields = ('auteur_id', 'livre_associe_id')  # Pour faciliter la sélection si beaucoup d'utilisateurs/livres

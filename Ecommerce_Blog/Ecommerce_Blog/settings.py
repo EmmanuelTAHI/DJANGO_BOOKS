@@ -56,6 +56,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'e_commerce.context_processors.counters',
             ],
         },
     },
@@ -100,8 +101,8 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'height': 300,
-        'width': 300,
+        'height': 500,
+        'width': '135%',
     },
 }
 AUTHENTICATION_BACKENDS = [

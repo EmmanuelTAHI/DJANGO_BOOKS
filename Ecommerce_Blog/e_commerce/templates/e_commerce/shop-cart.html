@@ -4,7 +4,7 @@
 {% block content %}
 	<div class="page-content">
 		<!-- inner page banner -->
-			<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url({% static 'images/background/bg3.jpg' %});">
+			<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url('{% static 'images/background/bg3.jpg' %}');">
 				<div class="container">
 					<div class="dz-bnr-inr-entry">
 						<h1>Cart</h1>
@@ -39,24 +39,22 @@
 								</thead>
 								<tbody>
 									{% for item in items %}
-									<tr>
+									<tr data-livre-id="{{ item.livre.id }}">
 										<td class="product-item-img">
 											<img src="{{ item.livre.couverture.url }}" alt="{{ item.livre.titre }}" width="100">
 										</td>
 										<td class="product-item-name">{{ item.livre.titre }}</td>
 										<td class="product-item-price">{{ item.livre.prix }} FCFA</td>
-										<td class="product-item-quantity">
-											{{ item.quantite }}
-										</td>
+										<td class="product-item-ququantity">{{ item.quantite }}</td>
 										<td class="product-item-totle">{{ item.total }} FCFA</td>
 										<td class="product-item-close">
-											<a href="{% url 'e_commerce:remove-from-cart' item.id %}" class="ti-close"></a>
+											<a href="#" class="ti-close remove-from-cart-btn" data-livre-id="{{ item.livre.id }}"></a>
 										</td>
 									</tr>
 									{% empty %}
 									<tr><td colspan="6">Votre panier est vide.</td></tr>
 									{% endfor %}
-									</tbody>
+								</tbody>
 							</table>
 						</div>
 					</div>

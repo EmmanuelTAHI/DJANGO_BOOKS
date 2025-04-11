@@ -49,106 +49,6 @@
                                                     Advanture
                                                 </label>
                                             </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-03">
-                                                <label class="form-check-label" for="productCheckBox-03">
-                                                    Animation
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-04">
-                                                <label class="form-check-label" for="productCheckBox-04">
-                                                    Biography
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-05">
-                                                <label class="form-check-label" for="productCheckBox-05">
-                                                    Comedy
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-06">
-                                                <label class="form-check-label" for="productCheckBox-06">
-                                                    Crime
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-07">
-                                                <label class="form-check-label" for="productCheckBox-07">
-                                                    Documentary
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-016">
-                                                <label class="form-check-label" for="productCheckBox-014">
-                                                    Design
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-08">
-                                                <label class="form-check-label" for="productCheckBox-08">
-                                                    Fantasy
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-09">
-                                                <label class="form-check-label" for="productCheckBox-09">
-                                                    History
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-010">
-                                                <label class="form-check-label" for="productCheckBox-010">
-                                                    Horror
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-011">
-                                                <label class="form-check-label" for="productCheckBox-011">
-                                                    Mystery
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-012">
-                                                <label class="form-check-label" for="productCheckBox-012">
-                                                    Romance
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-013">
-                                                <label class="form-check-label" for="productCheckBox-013">
-                                                    Sci-fi
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-014">
-                                                <label class="form-check-label" for="productCheckBox-014">
-                                                    Sport
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox-015">
-                                                <label class="form-check-label" for="productCheckBox-014">
-                                                    Science
-                                                </label>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +181,7 @@
                             <div class="shop-tab">
                                 <ul class="nav text-center product-filter justify-content-end" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'book-list' %}">
+                                        <a class="nav-link" href="{% url 'e_commerce:book-list' %}">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 5H21C21.2652 5 21.5196 4.89464 21.7071 4.7071C21.8946 4.51957 22 4.26521 22 4C22 3.73478 21.8946 3.48043 21.7071 3.29289C21.5196 3.10536 21.2652 3 21 3H3C2.73478 3 2.48043 3.10536 2.29289 3.29289C2.10536 3.48043 2 3.73478 2 4C2 4.26521 2.10536 4.51957 2.29289 4.7071C2.48043 4.89464 2.73478 5 3 5Z"
@@ -294,7 +194,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'book-grid-view' %}">
+                                        <a class="nav-link" href="{% url 'e_commerce:book-grid-view' %}">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 11H10C10.2652 11 10.5196 10.8946 10.7071 10.7071C10.8946 10.5196 11 10.2652 11 10V3C11 2.73478 10.8946 2.48043 10.7071 2.29289C10.5196 2.10536 10.2652 2 10 2H3C2.73478 2 2.48043 2.10536 2.29289 2.29289C2.10536 2.48043 2 2.73478 2 3V10C2 10.2652 2.10536 10.5196 2.29289 10.7071C2.48043 10.8946 2.73478 11 3 11ZM4 4H9V9H4V4Z"
@@ -365,14 +265,14 @@
                                     <img src="{{ livre.couverture.url }}" alt="book">
                                 </div>
                                 <div class="bookmark-btn style-2">
-                                    <input class="form-check-input toggle-wishlist" type="checkbox" id="flexCheckDefault{{ livre.id }}" data-livre-id="{{ livre.id }}"
+                                    <input class="form-check-input add-to-wishlist" type="checkbox" id="flexCheckDefault{{ livre.id }}" data-livre-id="{{ livre.id }}"
                                     {% if livre.id in wishlist_ids %}checked{% endif %} >
                                     <label class="form-check-label" for="flexCheckDefault{{ livre.id }}">
                                         <i class="flaticon-heart"></i>
                                     </label>
                                 </div>
                                 <div class="dz-content">
-                                    <h5 class="title"><a href="#">{{ livre.titre|truncatechars:20 }}</a></h5>
+                                    <h5 class="title"><a href="{% url 'e_commerce:book-detail' livre.id %}">{{ livre.titre|truncatechars:20 }}</a></h5>
                                     <ul class="dz-tags">
                                         {% for tag in livre.tags_ids.all %}
                                         <li><a href="#">{{ tag.nom }},</a></li>
@@ -392,7 +292,6 @@
                                             <span class="price-num">{{ livre.prix }} FCFA</span>
                                         </div>
                                         <a href="#" class="btn btn-secondary box-btn btnhover btnhover2 add-to-cart-btn" data-livre-id="{{ livre.id }}"><i class="flaticon-shopping-cart-1 m-r10"></i>Add to cart</a>
-<!--                                        <a href="{% url 'add-to-cart' livre.id %}" class="btn btn-secondary box-btn btnhover btnhover2"><i class="flaticon-shopping-cart-1 m-r10"></i>Add to cart</a>-->
                                     </div>
                                 </div>
                             </div>
@@ -494,8 +393,7 @@
     <!-- Feature Box End -->
 
     <!-- Newsletter -->
-    <section class="py-5 newsletter-wrapper"
-             style="background-image: url('images/background/bg1.jpg'); background-size: cover;">
+    <section class="py-5 newsletter-wrapper" style="background-image: url('{% static 'images/background/bg1.jpg' %}'); background-size: cover;">
         <div class="container">
             <div class="subscride-inner">
                 <div class="row style-1 justify-content-xl-between justify-content-lg-center align-items-center text-xl-start text-center">
@@ -532,13 +430,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('.toggle-wishlist').on('change', function() {
+    $('.add-to-wishlist').on('change', function() {
         var livreId = $(this).data('livre-id');
         var checkbox = $(this);
         console.log('Book ID clicked:', livreId); // Ajoute ceci pour déboguer
 
         $.ajax({
-            url: "{% url 'toggle_wishlist' %}",
+            url: "{% url 'e_commerce:add-to-wishlist' %}",
             type: 'POST',
             data: {
                 'livre_id': livreId,

@@ -48,32 +48,31 @@ def shop_cart(request):
         'panier': panier
     })
 
+@login_required
+def add_to_cart(request, livre_id):
+    if request.method == 'POST':
+        livre = get_object_or_404(Livre, id=livre_id)
+        panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
+        ligne, created = LignePanier.objects.get_or_create(panier=panier, livre=livre)
+        if not created:
+            ligne.quantite += 1
+            ligne.save()
+            return JsonResponse({'status': 'updated', 'message': f"Quantité de {livre.titre} augmentée dans le panier."})
+        return JsonResponse({'status': 'added', 'message': f"{livre.titre} ajouté au panier."})
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
 
 @login_required
 def remove_from_cart(request, livre_id):
-    # Récupérer ou créer le panier de l'utilisateur
-    panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
-
-    # Chercher la ligne correspondant au livre dans ce panier
-    try:
-        item = LignePanier.objects.get(panier=panier, livre__id=livre_id)
-        item.delete()
-        messages.success(request, f"{item.livre.titre} retiré du panier.")
-    except LignePanier.DoesNotExist:
-        messages.error(request, "Ce livre n'est pas dans votre panier.")
-
-    return redirect('e_commerce:shop-cart')
-
-@login_required
-def add_to_cart(request, livre_id):
-    livre = get_object_or_404(Livre, id=livre_id)
-    panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
-    ligne, created = LignePanier.objects.get_or_create(panier=panier, livre=livre)
-    if not created:
-        ligne.quantite += 1
-        ligne.save()
-    messages.success(request, f"{livre.titre} ajouté au panier.")
-    return redirect('e_commerce:shop-cart')
+    if request.method == 'POST':
+        panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
+        try:
+            item = LignePanier.objects.get(panier=panier, livre__id=livre_id)
+            livre_titre = item.livre.titre  # Stocker le titre avant de supprimer
+            item.delete()
+            return JsonResponse({'status': 'removed', 'message': f"{livre_titre} retiré du panier.", 'livre_id': livre_id})
+        except LignePanier.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': "Ce livre n'est pas dans votre panier."}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
 
 def shop_checkout(request):
     return render(request, 'e_commerce/shop-checkout.html')
@@ -91,7 +90,7 @@ def wishlist(request):
         return render(request, 'e_commerce/wishlist.html', {'wishlist_items': []})
 
 @login_required
-def toggle_wishlist(request):
+def add_to_wishlist(request):
     if request.method == 'POST':
         livre_id = request.POST.get('livre_id')
         try:
