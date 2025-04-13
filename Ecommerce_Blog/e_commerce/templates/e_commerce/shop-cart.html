@@ -45,7 +45,11 @@
 										</td>
 										<td class="product-item-name">{{ item.livre.titre }}</td>
 										<td class="product-item-price">{{ item.livre.prix }} FCFA</td>
-										<td class="product-item-ququantity">{{ item.quantite }}</td>
+										<td class="product-item-quantity">
+											<div class="quantity btn-quantity style-1 me-3">
+												<input type="text" value="{{ item.quantite }}" name="demo_vertical2"/>
+											</div>
+										</td>
 										<td class="product-item-totle">{{ item.total }} FCFA</td>
 										<td class="product-item-close">
 											<a href="#" class="ti-close remove-from-cart-btn" data-livre-id="{{ item.livre.id }}"></a>
@@ -63,58 +67,26 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="widget">
-							<form class="shop-form">
-								<h4 class="widget-title">Calculate Shipping</h4>
-								<div class="form-group">
-									<select class="default-select">
-										  <option selected>Credit Card Type</option>
-										  <option value="1">Another option</option>
-										  <option value="2">A option</option>
-										  <option value="3">Potato</option>
-									</select>
-								</div>
-								<div class="row">
-									<div class="form-group col-lg-6">
-										<input type="text" class="form-control" placeholder="Credit Card Number">
-									</div>
-									<div class="form-group col-lg-6">
-										<input type="text" class="form-control" placeholder="Card Verification Number">
-									</div>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Coupon Code">
-								</div>
-								<div class="form-group">
-									<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-primary btnhover" type="button">Apply Coupon</a>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="widget">
-							<h4 class="widget-title">Cart Subtotal</h4>
+							<h4 class="widget-title">Total</h4>
 							<table class="table-bordered check-tbl m-b25">
 								<tbody>
 									<tr>
-										<td>Order Subtotal</td>
-										<td>$125.96</td>
+										<td>Prix total</td>
+										<td id="prix-total">{{ panier.total_panier }} FCFA</td>
 									</tr>
 									<tr>
-										<td>Shipping</td>
-										<td>Free Shipping</td>
-									</tr>
-									<tr>
-										<td>Coupon</td>
-										<td>$28.00</td>
+										<td>Frais d'expédition</td>
+										<td id="frais-expedition">1500 FCFA</td>
 									</tr>
 									<tr>
 										<td>Total</td>
-										<td>$506.00</td>
+										<td id="total-general">{{ panier.total_panier|add:1500 }} FCFA</td>
 									</tr>
 								</tbody>
 							</table>
+
 							<div class="form-group m-b25">
-								<a href="{% url 'e_commerce:shop-checkout' %}" class="btn btn-primary btnhover" type="button">Proceed to Checkout</a>
+								<a href="{% url 'e_commerce:shop-checkout' %}" class="btn btn-primary btnhover" type="button">Passer à la confirmation</a>
 							</div>
 						</div>
 					</div>
@@ -122,8 +94,78 @@
 			</div>
 			<!-- Product END -->
 		</section>
-		<!-- contact area End--> 
-	
+		<!-- contact area End-->
 	</div>
-		
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+	// Fonction pour recalculer le prix total global et le total final
+	function updateGlobalTotals() {
+		let totalLivres = 0;
+
+		// Parcourir chaque ligne de livre
+		$('.product-item-totle').each(function() {
+			const text = $(this).text().replace(' FCFA', '').replace(',', '.');
+			const prix = parseInt(text);
+			if (!isNaN(prix)) {
+				totalLivres += prix;
+			}
+		});
+
+		// Met à jour le prix total
+		$('td:contains("Prix total")').next().text(totalLivres.toFixed(2) + ' FCFA');
+
+		// Récupère les frais d’expédition (1500 FCFA par défaut ici)
+		const fraisExpedition = 1500;
+
+		// Met à jour le total final
+		const totalFinal = totalLivres + fraisExpedition;
+		$('td:contains("Total")').next().text(totalFinal.toFixed(2) + ' FCFA');
+	}
+
+	// Capter le clic sur les boutons + ou -
+	$('.btn-quantity').on('click', 'button', function() {
+		const button = $(this);
+		const container = button.closest('tr');  // ligne du tableau
+		const livreId = container.data('livre-id');
+		const input = container.find('input[name="demo_vertical2"]');
+		let quantity = parseInt(input.val());
+
+		// Vérifie si c'est le bouton +
+		if (button.hasClass('quantity-right-plus')) {
+			quantity++;
+		}
+		// Ou le bouton - (mais pas moins de 1)
+		else if (button.hasClass('quantity-left-minus') && quantity > 1) {
+			quantity--;
+		}
+
+		// Met à jour l'affichage localement
+		input.val(quantity);
+
+		// Requête AJAX vers le backend
+		$.ajax({
+			url: '/update_quantity/',
+			method: 'POST',
+			data: {
+				'livre_id': livreId,
+				'quantite': quantity,
+				'csrfmiddlewaretoken': '{{ csrf_token }}'
+			},
+			success: function(response) {
+				if (response.status === 'success') {
+					// Mettre à jour le total du livre
+					container.find('.product-item-totle').text(response.total_livre + ' FCFA');
+
+					// Mettre à jour le total global
+					updateGlobalTotals();
+				}
+			},
+			error: function() {
+				alert("Erreur lors de la mise à jour de la quantité.");
+			}
+		});
+	});
+});
+</script>
 {% endblock content %}

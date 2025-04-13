@@ -51,23 +51,23 @@ class Article(models.Model):
     est_publie = models.BooleanField(default=False)
     livre_associe_id = models.ForeignKey('e_commerce.Livre', on_delete=models.SET_NULL, null=True, blank=True)
     date_de_publication = models.DateTimeField(default=timezone.now)
-    slug = models.SlugField(default="",unique=True, blank=True)
+    # slug = models.SlugField(default="",unique=True, blank=True)
 
     # Standards
     statut = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base_slug = slugify(self.titre) + "-" + str(self.date_de_publication.year)
-            slug = base_slug
-            counter = 1
-            while Article.objects.filter(slug=slug).exists():
-                slug = f"{base_slug}-{counter}"
-                counter += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         base_slug = slugify(self.titre) + "-" + str(self.date_de_publication.year)
+    #         slug = base_slug
+    #         counter = 1
+    #         while Article.objects.filter(slug=slug).exists():
+    #             slug = f"{base_slug}-{counter}"
+    #             counter += 1
+    #         self.slug = slug
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return self.titre

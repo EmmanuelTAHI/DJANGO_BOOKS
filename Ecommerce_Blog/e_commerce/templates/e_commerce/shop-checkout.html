@@ -5,13 +5,13 @@
 		
 	<div class="page-content">
 		<!-- inner page banner -->
-		<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url({% static 'images/background/bg3.jpg' %});">
+		<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url('{% static 'images/background/bg3.jpg' %}');">
 			<div class="container">
 				<div class="dz-bnr-inr-entry">
 					<h1>Checkout</h1>
 					<nav aria-label="breadcrumb" class="breadcrumb-row">
 						<ul class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{% url 'e_commerce:index' %}"> Home</a></li>
+							<li class="breadcrumb-item"><a href="{% url 'e_commerce:index' %}">Home</a></li>
 							<li class="breadcrumb-item">Checkout</li>
 						</ul>
 					</nav>
@@ -28,136 +28,38 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6">
 							<div class="widget">
-								<h4 class="widget-title">Billing & Shipping Address</h4>
+								<h4 class="widget-title">Adresse d'expédition</h4>
 								<div class="form-group">
 									<select class="default-select">
 										<option value="1">Åland Islands</option>
 										<option value="2">Afghanistan</option>
 										<option value="3">Albania</option>
 										<option value="4">Algeria</option>
-										<option value="5">Andorra</option>
-										<option value="6">Angola</option>
-										<option value="7">Anguilla</option>
-										<option value="8">Antarctica</option>
-										<option value="9">Antigua and Barbuda</option>
-										<option value="10">Argentina</option>
-										<option value="11">Armenia</option>
-										<option value="12">Aruba</option>
-										<option value="13">Australia</option>
 									</select>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="First Name">
+										<input type="text" class="form-control" placeholder="Prénom(s)">
 									</div>
 									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Last Name">
+										<input type="text" class="form-control" placeholder="Nom">
 									</div>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Company Name">
+									<input type="text" class="form-control" placeholder="Ville">
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Address">
-								</div>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Apartment, suite, unit etc.">
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Town / City">
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="State / County">
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Postcode / Zip">
-									</div>
+									<input type="text" class="form-control" placeholder="Adresse postale / Lieu de livraison">
 								</div>
 								<div class="row">
 									<div class="form-group col-md-6">
 										<input type="email" class="form-control" placeholder="Email">
 									</div>
 									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Phone">
-									</div>
-								</div>
-								<button class="btn btn-primary btnhover mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#create-an-account">Create an account <i class="fa fa-arrow-circle-o-down"></i></button>
-								<div id="create-an-account" class="collapse">
-									<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-									<div class="form-group">
-										<input type="password" class="form-control" placeholder="Password">
+										<input type="text" class="form-control" placeholder="Téléphone">
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-6 col-md-6">
-							<button class="btn btn-primary btnhover mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#different-address">Ship to a different address <i class="fa fa-arrow-circle-o-down"></i></button>
-							<div id="different-address" class="collapse">
-								<p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>
-								<div class="form-group">
-									<select class="default-select">
-										<option value="">Åland Islands</option>
-										<option value="">Afghanistan</option>
-										<option value="">Albania</option>
-										<option value="">Algeria</option>
-										<option value="">Andorra</option>
-										<option value="">Angola</option>
-										<option value="">Anguilla</option>
-										<option value="">Antarctica</option>
-										<option value="">Antigua and Barbuda</option>
-										<option value="">Argentina</option>
-										<option value="">Armenia</option>
-										<option value="">Aruba</option>
-										<option value="">Australia</option>
-									</select>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="First Name">
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Last Name">
-									</div>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Company Name">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Address">
-								</div>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Apartment, suite, unit etc.">
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Town / City">
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="State / County">
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Postcode / Zip">
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<input type="email" class="form-control" placeholder="Email">
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Phone">
-									</div>
-								</div>
-								<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-							</div>
-							<div class="form-group">
-								<textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-							</div>
-
 						</div>
 					</div>
 				</form>
@@ -165,96 +67,174 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="widget">
-							<h4 class="widget-title">Your Order</h4>
+							<h4 class="widget-title">Votre commande</h4>
 							<table class="table-bordered check-tbl">
 								<thead class="text-center">
 									<tr>
 										<th>IMAGE</th>
-										<th>PRODUCT NAME</th>
+										<th>PRODUIT</th>
 										<th>TOTAL</th>
 									</tr>
 								</thead>
 								<tbody>
+									{% for item in items %}
 									<tr>
-										<td class="product-item-img"><img src="{% static 'images/books/grid/book3.jpg' %}" alt=""></td>
-										<td class="product-item-name">Prduct Item 5</td>
-										<td class="product-price">$28.00</td>
+										<td class="product-item-img">
+											<img src="{{ item.livre.couverture.url }}" alt="{{ item.livre.titre }}">
+										</td>
+										<td class="product-item-name">{{ item.livre.titre }}</td>
+										<td class="product-price">{{ item.total }} FCFA</td>
 									</tr>
-									<tr>
-										<td class="product-item-img"><img src="{% static 'images/books/grid/book2.jpg' %}" alt=""></td>
-										<td class="product-item-name">Prduct Item 4</td>
-										<td class="product-price">$36.00</td>
-									</tr>
-									<tr>
-										<td class="product-item-img"><img src="{% static 'images/books/grid/book4.jpg' %}" alt=""></td>
-										<td class="product-item-name">Prduct Item 3</td>
-										<td class="product-price">$28.00</td>
-									</tr>
-									<tr>
-										<td class="product-item-img"><img src="{% static 'images/books/grid/book5.jpg' %}" alt=""></td>
-										<td class="product-item-name">Prduct Item 2</td>
-										<td class="product-price">$36.00</td>
-									</tr>
-									<tr>
-										<td class="product-item-img"><img src="{% static 'images/books/grid/book1.jpg' %}" alt=""></td>
-										<td class="product-item-name">Prduct Item 1</td>
-										<td class="product-price">$28.00</td>
-									</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<form class="shop-form widget">
-							<h4 class="widget-title">Order Total</h4>
+							<h4 class="widget-title">Total de la commande</h4>
 							<table class="table-bordered check-tbl mb-4">
 								<tbody>
 									<tr>
-										<td>Order Subtotal</td>
-										<td class="product-price">$125.96</td>
+										<td>Prix total</td>
+										<td class="product-price">{{ total }} FCFA</td>
 									</tr>
 									<tr>
-										<td>Shipping</td>
-										<td>Free Shipping</td>
-									</tr>
-									<tr>
-										<td>Coupon</td>
-										<td class="product-price">$28.00</td>
+										<td>Frais d'expédition</td>
+										<td>{{ frais_expedition }} FCFA</td>
 									</tr>
 									<tr>
 										<td>Total</td>
-										<td class="product-price-total">$506.00</td>
+										<td class="product-price-total">{{ total_general }} FCFA</td>
 									</tr>
 								</tbody>
 							</table>
-							<h4 class="widget-title">Payment Method</h4>
+							<h4 class="widget-title">Moyen de paiement</h4>
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Name on Card">
-							</div>
-							<div class="form-group">
-								<select class="default-select">
-									<option value="">Credit Card Type</option>
-									<option value="">Another option</option>
-									<option value="">A option</option>
-									<option value="">Potato</option>
+								<select class="default-select" id="payment-method">
+									<option value="mobile-money">Mobile money</option>
+									<option value="credit-card">Carte de crédit</option>
+									<option value="cash">Espèces</option>
 								</select>
 							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Credit Card Number">
+
+							<!-- Formulaire pour Carte de crédit -->
+							<div id="credit-card-form" class="payment-option-form" style="display: none;">
+								<div class="form-group">
+									<input type="text" id="card-holder" class="form-control" placeholder="Nom du titulaire de la carte">
+								</div>
+								<div class="form-group">
+									<input type="text" id="card-number" class="form-control" placeholder="Numéro de la carte">
+								</div>
+								<div class="row">
+									<div class="form-group col-md-6">
+										<input type="date" id="card-expiry" class="form-control">
+									</div>
+									<div class="form-group col-md-6">
+										<input type="text" id="card-cvv" class="form-control" placeholder="CVV">
+									</div>
+								</div>
 							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Card Verification Number">
+
+							<!-- Formulaire pour Mobile Money -->
+							<div id="mobile-money-form" class="payment-option-form">
+								<div class="form-group">
+									<div class="operator-selection d-flex justify-content-between text-center">
+										<label class="operator-option">
+											<input type="radio" name="operator" value="orange">
+											<img src="{% static 'images/operators/orange.png' %}" alt="Orange">
+											<p>Orange</p>
+										</label>
+
+										<label class="operator-option">
+											<input type="radio" name="operator" value="wave">
+											<img src="{% static 'images/operators/wave.png' %}" alt="Wave">
+											<p>Wave</p>
+										</label>
+
+										<label class="operator-option">
+											<input type="radio" name="operator" value="mtn">
+											<img src="{% static 'images/operators/mtn2.png' %}" alt="MTN">
+											<p>MTN</p>
+										</label>
+
+										<label class="operator-option">
+											<input type="radio" name="operator" value="moov">
+											<img src="{% static 'images/operators/moov.png' %}" alt="Moov">
+											<p>Moov</p>
+										</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="tel" id="phone-number" class="form-control" name="phone" placeholder="Entrez votre numéro">
+								</div>
 							</div>
+
+							<!-- Message pour Espèces -->
+							<div id="cash-form" class="payment-option-form" style="display: none;">
+								<div class="form-group">
+									<p>Veuillez prévoir le montant exact à remettre au livreur lors de la réception.</p>
+								</div>
+							</div>
+
 							<div class="form-group">
-								<button class="btn btn-primary btnhover" type="button">Place Order Now </button>
+								<button class="btn btn-primary btnhover" type="button">Valider</button>
 							</div>
 						</form>
 					</div>
 				</div>
+
 			</div>
 			<!-- Product END -->
 		</section>
 		<!-- contact area End-->
 	</div>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/js/intlTelInput.min.js"></script>
+<script>
+	function updatePaymentFields() {
+	  const selected = document.querySelector('.default-select').value;
 
+	  const creditForm = document.getElementById('credit-card-form');
+	  const mobileForm = document.getElementById('mobile-money-form');
+	  const cashForm = document.getElementById('cash-form');
+
+	  if (creditForm) creditForm.style.display = selected === 'credit-card' ? 'block' : 'none';
+	  if (mobileForm) mobileForm.style.display = selected === 'mobile-money' ? 'block' : 'none';
+	  if (cashForm) cashForm.style.display = selected === 'cash' ? 'block' : 'none';
+	}
+
+	// Appelé au chargement de la page
+	window.addEventListener('DOMContentLoaded', updatePaymentFields);
+</script>
+
+<script>
+	    // Initialiser avec la méthode de paiement par défaut (Carte de crédit)
+    document.getElementById('payment-method').dispatchEvent(new Event('change'));
+
+	const input = document.querySelector("#phone-number");
+  	const iti = window.intlTelInput(input, {
+    initialCountry: "ci", // CI pour Côte d'Ivoire
+    preferredCountries: ["ci", "fr", "us"],
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+  });
+</script>
+<script>
+    document.getElementById('payment-method').addEventListener('change', function() {
+        var paymentMethod = this.value;
+
+        // Masquer tous les formulaires
+        document.querySelectorAll('.payment-option-form').forEach(function(form) {
+            form.style.display = 'none';
+        });
+
+        // Afficher le formulaire en fonction du choix
+        if (paymentMethod === 'credit-card') {
+            document.getElementById('credit-card-form').style.display = 'block';
+        } else if (paymentMethod === 'mobile-money') {
+            document.getElementById('mobile-money-form').style.display = 'block';
+        } else if (paymentMethod === 'cash') {
+            document.getElementById('cash-form').style.display = 'block';
+        }
+    });
+</script>
 {% endblock content %}

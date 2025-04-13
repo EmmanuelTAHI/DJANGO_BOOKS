@@ -8,7 +8,11 @@
 		<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url('{% static 'images/background/bg3.jpg' %}');">
 			<div class="container">
 				<div class="dz-bnr-inr-entry">
-					<h1>Blog Details</h1>
+
+					{%  block title %}
+					<title>{{ article.titre }}</title>
+					{%  endblock title %}
+
 					<nav aria-label="breadcrumb" class="breadcrumb-row">
 						<ul class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{% url 'e_commerce:index' %}"> Home</a></li>
@@ -42,11 +46,6 @@
 									<p>Ut non nisl et magna molestie tincidunt. Aliquam erat volutpat. Vivamus eget feugiat odio. Vivamus faucibus lorem nec mollis placerat. Nulla et dapibus est. Fusce porttitor arcu ac velit commodo hendrerit. Vestibulum tempor dapibus sapien. Maecenas accumsan rhoncus massa, nec ornare libero faucibus tincidunt. Cras metus tortor, pretium vitae scelerisque id, sollicitudin at est.</p>
 									<blockquote class="wp-block-quote is-style-default"><p>A great book should leave you with many experiences, and slightly exhausted at the end. You live several lives while reading. </p><cite>Library Community</cite></blockquote>
 									<p>Fusce sem ligula, imperdiet sed nisi sit amet, euismod posuere dolor. Vestibulum in ante ut tortor eleifend venenatis. Morbi ac hendrerit nisl. Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor vitae, porttitor quis erat. </p>
-									<h4 class="m-b30">Understanding The Background Of Library.</h4>
-									<img class="alignleft rounded-md w-50" src="{% static 'images/blog/blog.jpg' %}" alt="">
-									<p>Pellentesque quis molestie lacus. Sed et pellentesque nibh. Pellentesque pretium pretium neque, vel fermentum nisl ornare non. Aliquam interdum rutrum magna quis.</p>
-									<p>Donec pretium, quam a aliquet pretium, dolor magna malesuada libero, non rhoncus quam lectus at lectus. Mauris id consequat est, ut aliquet lorem. Maecenas mi sem, aliquam et semper et, sagittis non magna. Vivamus et maximus nulla. Morbi tincidunt ex ac diam imperdiet, ut pretium justo porttitor. Class aptent taciti sociosqu ad litora</p>
-									<p>Donec suscipit porta lorem eget condimentum. Morbi vitae mauris in leo venenatis varius. Aliquam nunc enim, egestas ac dui in, aliquam vulputate erat. Curabitur porttitor ante ut odio vestibulum, et iaculis arcu scelerisque. Sed ornare mi vitae elit molestie malesuada. Curabitur venenatis venenatis elementum.</p>
 								</div>
 								<div class="dz-meta meta-bottom border-top">
 									<div class="post-tags">

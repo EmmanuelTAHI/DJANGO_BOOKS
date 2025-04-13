@@ -330,52 +330,30 @@
 				</div>
 				<div class="swiper-container books-wrapper-3 swiper-four overflow-hidden">
 					<div class="swiper-wrapper">
+						{% for livre in livres %}
 						<div class="swiper-slide">
 							<div class="books-card style-3 wow fadeInUp" data-wow-delay="0.1s">
 								<div class="dz-media">
-									<img src="{% static 'images/books/grid/book14.jpg' %}" alt="book">
+									<img src="{{ livre.couverture.url }}" alt="book">
 								</div>
 								<div class="dz-content">
-									<h5 class="title"><a href="{% url 'e_commerce:shop-grid' %}">Take Out Tango</a></h5>
+									<h5 class="title"><a href="{% url 'e_commerce:shop-grid' %}">{{ livre.titre|truncatechars:20 }}</a></h5>
 									<ul class="dz-tags">
-										<li><a href="{% url 'e_commerce:shop-grid' %}">SPORTS,</a></li>
-										<li><a href="{% url 'e_commerce:shop-grid' %}">DRAMA</a></li>
+										{% for tag in livre.tags_ids.all %}
+										<li><a href="{% url 'e_commerce:shop-grid' %}">{{ tag.nom }},</a></li>
+										{% empty %}
+                                        <span>Aucun tag</span>
+                                        {% endfor %}
 									</ul>
 									<div class="book-footer">
-										<div class="rate">
-											<i class="flaticon-star"></i> 6.8
-										</div>
 										<div class="price">
-											<span class="price-num">$9.5</span>
-											<del>$12.0</del>
+											<span class="price-num">{{ livre.prix }} FCFA</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="swiper-slide">
-							<div class="books-card style-3 wow fadeInUp" data-wow-delay="0.2s">
-								<div class="dz-media">
-									<img src="{% static 'images/books/grid/book14.jpg' %}" alt="book">
-								</div>
-								<div class="dz-content">
-									<h5 class="title"><a href="{% url 'e_commerce:shop-grid' %}">The Missadventure</a></h5>
-									<ul class="dz-tags">
-										<li><a href="{% url 'e_commerce:shop-grid' %}">SPORTS,</a></li>
-										<li><a href="{% url 'e_commerce:shop-grid' %}">DRAMA</a></li>
-									</ul>
-									<div class="book-footer">
-										<div class="rate">
-											<i class="flaticon-star"></i> 6.8
-										</div>
-										<div class="price">
-											<span class="price-num">$9.5</span>
-											<del>$12.0</del>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 				<div class="m-t20 m-r10 extra-cell">
@@ -405,10 +383,9 @@
 								</div>
 								<div class="dz-content">
 									<h6 class="sub-title">BEST SELLER</h6>
-									<h2 class="title">A Heavy LIft</h2>
+									<h2 class="title">{{ livre.titre }}</h2>
 									<ul class="dz-tags">
-										<li>Napoleon Hill</li>
-										<li>Business & Strategy</li>
+										<li>{{ tag.nom }}</li>
 									</ul>
 									<p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
 									<div class="price">

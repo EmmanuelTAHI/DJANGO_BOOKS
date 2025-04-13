@@ -5,13 +5,13 @@
 		
 	<div class="page-content">
 			<!-- inner page banner -->
-			<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url(images/background/bg3.jpg);">
+			<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url('{% static 'images/background/bg3.jpg' %}');">
 				<div class="container">
 					<div class="dz-bnr-inr-entry">
 						<h1>Blog Grid Left Sidebar</h1>
 						<nav aria-label="breadcrumb" class="breadcrumb-row">
 							<ul class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.html"> Home</a></li>
+								<li class="breadcrumb-item"><a href="{% url 'e_commerce:index' %}">Home</a></li>
 								<li class="breadcrumb-item">Blog Grid Left Sidebar</li>
 							</ul>
 						</nav>
@@ -107,86 +107,28 @@
 						</div>
 						<div class="col-xl-8 col-lg-8 order-lg-2 order-1">
 							<div class="row">
+								{% for article in articles %}
 								<div class="col-xl-6 col-lg-6">
 									<div class="dz-blog style-1 bg-white m-b30">
 										<div class="dz-media dz-img-effect zoom">
-											<img src="{% static 'images/blog/large/blog2.jpg' %}" alt="">
+											<a href="{% url 'blog:blog-detail' %}"><img src="{{ article.couverture.url }}" alt=""></a>
 										</div>
 										<div class="dz-info">
 											<h4 class="dz-title">
-												<a href="{% url 'blog:blog-detail' %}">The library is inhabited by spirits that come out of the pages.</a>
+												<a href="{% url 'blog:blog-detail' %}">{{ article.titre }}</a>
 											</h4>
-											<p class="m-b0">Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor.</p>
+											<p class="m-b0">{{ article.resume }}</p>
 											<div class="dz-meta meta-bottom">
 												<ul class="border-0 pt-0">
-													<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>7 March, 2024</li>
-													<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);"> Johne Doe</a></li>
+													<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>{{ article.date_de_publication }}</li>
+<!--													<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);">{{ article.auteur_id }}</a></li>-->
 													<li class="post-comment"><a href="javascript:void(0);"><i class="far fa-comment-alt fa-fw"></i><span>15</span></a></li>
 												</ul>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-xl-6 col-lg-6">
-									<div class="dz-blog style-1 bg-white m-b30">
-										<div class="dz-media dz-img-effect zoom">
-											<img src="{% static 'images/blog/large/blog1.jpg' %}" alt="/">
-										</div>
-										<div class="dz-info">
-											<h4 class="dz-title">
-												<a href="{% url 'blog:blog-detail' %}">The 5 Secrets About Library Only A Handful Of People Know.</a>
-											</h4>
-											<p class="m-b0">Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor.</p>
-											<div class="dz-meta meta-bottom">
-												<ul class="border-0 pt-0">
-													<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>7 March, 2024</li>
-													<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);"> Johne Doe</a></li>
-													<li class="post-comment"><a href="javascript:void(0);"><i class="far fa-comment-alt fa-fw"></i><span>15</span></a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6">
-									<div class="dz-blog style-1 bg-white m-b30">
-										<div class="dz-media dz-img-effect zoom">
-											<img src="{% static 'images/blog/large/blog3.jpg' %}" alt="/">
-										</div>
-										<div class="dz-info">
-											<h4 class="dz-title">
-												<a href="{% url 'blog:blog-detail' %}">Most Effective Ways To Overcome Library's Problem.</a>
-											</h4>
-											<p class="m-b0">Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor.</p>
-											<div class="dz-meta meta-bottom">
-												<ul class="border-0 pt-0">
-													<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>7 March, 2024</li>
-													<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);"> Johne Doe</a></li>
-													<li class="post-comment"><a href="javascript:void(0);"><i class="far fa-comment-alt fa-fw"></i><span>15</span></a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6">
-									<div class="dz-blog style-1 bg-white m-b30">
-										<div class="dz-media dz-img-effect zoom">
-											<img src="{% static 'images/blog/large/blog4.jpg' %}" alt="">
-										</div>
-										<div class="dz-info">
-											<h4 class="dz-title">
-												<a href="{% url 'blog:blog-detail' %}">You Should Experience Library At Least Once In Lifetime</a>
-											</h4>
-											<p class="m-b0">Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor.</p>
-											<div class="dz-meta meta-bottom">
-												<ul class="border-0 pt-0">
-													<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>7 March, 2024</li>
-													<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);"> Johne Doe</a></li>
-													<li class="post-comment"><a href="javascript:void(0);"><i class="far fa-comment-alt fa-fw"></i><span>15</span></a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
+								{% endfor %}
 							</div>
 						</div>
 					</div>

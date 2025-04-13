@@ -7,19 +7,31 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .form import AuthForm
 from .models import Livre, Wishlist, Panier, LignePanier
 from django.http import JsonResponse
 
+
 # ==============================
 # 🌐 Pages générales
 # ==============================
 
+def get_panier_user(request):
+    if request.user.is_authenticated:
+        panier, _ = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
+        return panier
+    return None
+
 def index(request):
-    livres = Livre.objects.all()  # Récupère tous les livres
-    return render(request, 'e_commerce/index.html', {'livres': livres})
+    livres = Livre.objects.all()
+    panier_user = get_panier_user(request)
+    return render(request, 'e_commerce/index.html', {
+        'livres': livres,
+        'panier_user': panier_user
+    })
 
 def about(request):
     return render(request, 'e_commerce/about-us.html')
@@ -42,9 +54,16 @@ def shop_cart(request):
     panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
     items = panier.items.select_related('livre')  # Récupère les lignes du panier
     total = sum(item.total() for item in items)
+
+    # On convertit en int pour éviter les flottants
+    total_int = int(total)
+    frais_expedition = 1500  # Frais d'expédition fixes
+
+    # Retourne les valeurs dans la réponse
     return render(request, 'e_commerce/shop-cart.html', {
         'items': items,
-        'total': total,
+        'total': total_int,
+        'frais_expedition': frais_expedition,
         'panier': panier
     })
 
@@ -74,8 +93,37 @@ def remove_from_cart(request, livre_id):
             return JsonResponse({'status': 'error', 'message': "Ce livre n'est pas dans votre panier."}, status=404)
     return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
 
+@login_required
+@csrf_exempt  # à utiliser temporairement si AJAX bloque, sinon garde CSRF dans le POST
+def update_quantity(request):
+    if request.method == 'POST':
+        livre_id = request.POST.get('livre_id')
+        quantite = int(request.POST.get('quantite'))
+
+        panier = get_object_or_404(Panier, user=request.user)
+        ligne = get_object_or_404(LignePanier, panier=panier, livre_id=livre_id)
+
+        ligne.quantite = quantite
+        ligne.save()
+
+        return JsonResponse({'status': 'success', 'total_livre': ligne.total()})
+
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
+
+@login_required
 def shop_checkout(request):
-    return render(request, 'e_commerce/shop-checkout.html')
+    panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
+    items = panier.items.select_related('livre')  # Récupère les articles du panier
+    total = sum(item.total() for item in items)  # Calcule le total du panier
+    frais_expedition = 1500  # Frais d'expédition fixes (ou dynamiques selon ton cas)
+    total_general = total + frais_expedition  # Calcule le total général
+
+    return render(request, 'e_commerce/shop-checkout.html', {
+        'items': items,
+        'total': total,
+        'frais_expedition': frais_expedition,
+        'total_general': total_general,
+    })
 
 def shop_grid(request):
     livres = Livre.objects.all()

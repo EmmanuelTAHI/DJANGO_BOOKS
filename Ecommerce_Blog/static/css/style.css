@@ -12617,7 +12617,7 @@ button:focus {
   border-radius: var(--border-radius-base);
   font-weight: 500;
   position: relative;
-  text-transform: capitalize;
+  text-transform: none;
   font-family: "Poppins", sans-serif;
   align-items: center;
   overflow: hidden;
@@ -25657,5 +25657,33 @@ footer {
   -webkit-transition: none;
   -ms-transition: none;
   transition: none; }
+
+.operator-selection {
+	gap: 15px;
+}
+
+.operator-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+	margin: 0 10px;
+}
+
+.operator-option input {
+	margin-bottom: 5px;
+}
+
+.operator-option img {
+	width: 60px; /* ajuste selon tes images */
+	height: auto;
+	margin-bottom: 5px;
+}
+
+.operator-option p {
+	margin: 0;
+	font-size: 14px;
+	color: #333;
+}
 
 /*# sourceMappingURL=style.css.map */
