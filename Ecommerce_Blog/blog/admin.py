@@ -27,11 +27,16 @@ class ArticleAdmin(admin.ModelAdmin):
 # Enregistrement de Commentaire
 @admin.register(Commentaire)
 class CommentaireAdmin(admin.ModelAdmin):
-    list_display = ('article', 'auteur_id', 'contenu_short', 'parent_id', 'statut', 'created_at')
+    list_display = ('article', 'get_auteur_username', 'contenu_short', 'statut', 'created_at')
     list_filter = ('statut', 'created_at', 'article')
     search_fields = ('contenu', 'auteur_id__username')
-    raw_id_fields = ('auteur_id', 'article', 'parent_id')  # Pour éviter les listes déroulantes lourdes
+    raw_id_fields = ('auteur_id', 'article')  # parent_id n'existe plus dans le modèle
 
     def contenu_short(self, obj):
         return obj.contenu[:50] + '...' if len(obj.contenu) > 50 else obj.contenu
     contenu_short.short_description = 'Contenu (extrait)'
+
+    def get_auteur_username(self, obj):
+        return obj.auteur_id.username if obj.auteur_id else "Utilisateur supprimé"
+    get_auteur_username.short_description = "Auteur"
+    get_auteur_username.admin_order_field = 'auteur_id__username'

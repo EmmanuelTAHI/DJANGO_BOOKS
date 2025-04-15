@@ -82,10 +82,9 @@ class Commentaire(models.Model):
         verbose_name = "Commentaire"
         verbose_name_plural = "Commentaires"
 
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="commentaires")
-    auteur_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="commentaires")
+    auteur_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="auteur_commentaire_ids")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="article_commentaire_ids")
     contenu = models.TextField(max_length=1000)
-    parent_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
 
     # Standards
     statut = models.BooleanField(default=True)
