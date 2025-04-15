@@ -1,6 +1,19 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import activate_account, book_detail
+from rest_framework.routers import DefaultRouter
+from .viewsets import ShopCategorieViewSet, ShopTagViewSet, LivreViewSet, WishlistViewSet, PanierViewSet, LignePanierViewSet, CommandeViewSet, LigneCommandeViewSet
+
+# Initialisation du routeur
+router = DefaultRouter()
+router.register(r'categories', ShopCategorieViewSet)
+router.register(r'tags', ShopTagViewSet)
+router.register(r'livres', LivreViewSet)
+router.register(r'wishlist', WishlistViewSet)
+router.register(r'paniers', PanierViewSet)
+router.register(r'lignepaniers', LignePanierViewSet)
+router.register(r'commandes', CommandeViewSet)
+router.register(r'lignecommandes', LigneCommandeViewSet)
 
 app_name = 'e_commerce'
 
@@ -28,7 +41,6 @@ urlpatterns = [
     path('book-detail/<int:livre_id>/', book_detail, name='book-detail'),
     path('book-grid-view/', views.book_grid_view, name='book-grid-view'),
     path('book-grid-left-sidebar/', views.book_grid_left_sidebar, name='book-grid-left-sidebar'),
-    path('book-grid-no-sidebar/', views.book_grid_no_sidebar, name='book-grid-no-sidebar'),
     path('book-list-view-sidebar/', views.book_list_view_sidebar, name='book-list-view-sidebar'),
     path('book-grid-view-sidebar/', views.book_grid_view_sidebar, name='book-grid-view-sidebar'),
 
@@ -37,4 +49,7 @@ urlpatterns = [
     path('register/', views.inscription, name='register'),
     path('deconnexion/', views.deconnexion, name='deconnexion'),
     path('activate/<uidb64>/<token>/', activate_account, name='activate-account'),
+
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
 ]

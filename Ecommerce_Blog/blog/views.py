@@ -8,8 +8,8 @@ from django.utils import timezone
 # 📝 Pages Blog
 # ==============================
 
-def blog_detail(request):
-    article = get_object_or_404(Article, statut=True, date_de_publication__lte=timezone.now())
+def blog_detail(request,slug):
+    article = get_object_or_404(Article, statut=True, date_de_publication__lte=timezone.now(),slug=slug)
     commentaires_principaux = article.commentaires.filter(parent_id__isnull=True, statut=True).order_by('created_at')
 
     if request.method == 'POST' and request.user.is_authenticated:
@@ -23,7 +23,7 @@ def blog_detail(request):
                 parent_id=Commentaire.objects.get(id=parent_id) if parent_id else None
             )
             commentaire.save()
-            return redirect('blog:blog-detail')
+            return redirect('blog:blog-detail', commit=False)
         else:
             return HttpResponseForbidden("Le commentaire ne peut pas être vide.")
 
@@ -34,7 +34,8 @@ def blog_grid_left_sidebar(request):
     return render(request, 'blog/blog-grid-left-sidebar.html',{'articles': articles})
 
 def blog_grid_no_sidebar(request):
-    return render(request, 'blog/blog-grid-no-sidebar.html')
+    articles = Article.objects.filter(est_publie=True)
+    return render(request, 'blog/blog-grid-no-sidebar.html',{'articles': articles})
 
 @login_required
 def add_comment(request, article_slug):

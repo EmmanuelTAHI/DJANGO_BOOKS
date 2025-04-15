@@ -13,7 +13,7 @@
 							</div>
 							<div class="dz-content">
 								<div class="dz-header">
-									<h3 class="title">Think and Grow Rich</h3>
+									<h3 class="title">{{ livre.titre }}</h3>
 									<div class="shop-item-rating">
 										<div class="d-lg-flex d-sm-inline-flex d-flex align-items-center">
 											<ul class="dz-rating">
@@ -79,8 +79,8 @@
 					<div class="col-xl-8">
 						<div class="product-description tabs-site-button">
                             <ul class="nav nav-tabs">
-                                <li><a data-bs-toggle="tab" href="#graphic-design-1" class="active">Details Product</a></li>
-                                <li><a data-bs-toggle="tab" href="#developement-1">Customer Reviews</a></li>
+                                <li><a data-bs-toggle="tab" href="#graphic-design-1" class="active">Details</a></li>
+<!--                                <li><a data-bs-toggle="tab" href="#developement-1">Customer Reviews</a></li>-->
                             </ul>
 							<div class="tab-content">
 								<div id="graphic-design-1" class="tab-pane show active">
@@ -236,73 +236,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-4 mt-5 mt-xl-0">
-						<div class="widget">
-							<h4 class="widget-title">Related Books</h4>
-							<div class="row">
-								<div class="col-xl-12 col-lg-6">
-									<div class="dz-shop-card style-5">
-										<div class="dz-media">
-											<img src="{% static 'images/books/grid/book15.jpg' %}" alt="">
-										</div>
-										<div class="dz-content">
-											<h5 class="subtitle">Terrible Madness</h5>
-											<ul class="dz-tags">
-												<li>THRILLE,</li>
-												<li>DRAMA,</li>
-												<li>HORROR</li>
-											</ul>
-											<div class="price">
-												<span class="price-num">$45.4</span>
-												<del>$98.4</del>
-											</div>
-											<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-outline-primary btn-sm btnhover btnhover2"><i class="flaticon-shopping-cart-1 me-2"></i> Add to cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-12 col-lg-6">
-									<div class="dz-shop-card style-5">
-										<div class="dz-media">
-											<img src="{% static 'images/books/grid/book3.jpg' %}" alt="">
-										</div>
-										<div class="dz-content">
-											<h5 class="subtitle">Battle Drive</h5>
-											<ul class="dz-tags">
-												<li>THRILLE,</li>
-												<li>DRAMA,</li>
-												<li>HORROR</li>
-											</ul>
-											<div class="price">
-												<span class="price-num">$45.4</span>
-												<del>$98.4</del>
-											</div>
-											<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-outline-primary btn-sm btnhover btnhover2"><i class="flaticon-shopping-cart-1 me-2"></i> Add to cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-12 col-lg-6">
-									<div class="dz-shop-card style-5 mb-0">
-										<div class="dz-media">
-											<img src="{% static 'images/books/grid/book5.jpg' %}" alt="">
-										</div>
-										<div class="dz-content">
-											<h5 class="subtitle">Terrible Madness</h5>
-											<ul class="dz-tags">
-												<li>THRILLE,</li>
-												<li>DRAMA,</li>
-												<li>HORROR</li>
-											</ul>
-											<div class="price">
-												<span class="price-num">$45.4</span>
-												<del>$98.4</del>
-											</div>
-											<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-outline-primary btn-sm btnhover btnhover2"><i class="flaticon-shopping-cart-1 me-2"></i> Add to cart</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</section>
@@ -328,47 +261,47 @@
 		<section class="content-inner">
 			<div class="container">
 				<div class="row sp15">
-					<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
 						<div class="icon-bx-wraper style-2 m-b30 text-center">
 							<div class="icon-bx-lg">
 								<i class="fa-solid fa-users icon-cell"></i>
 							</div>
 							<div class="icon-content">
-								<h2 class="dz-title counter m-b0">125,663</h2>
-								<p class="font-20">Happy Customers</p>
+								<h2 class="dz-title counter m-b0">22,745</h2>
+								<p class="font-20">Utilisateurs satisfaits</p>
 							</div>
 						</div>
 					</div>
-					<div class=" col-lg-3 col-md-6 col-sm-6 col-6">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.2s">
 						<div class="icon-bx-wraper style-2 m-b30 text-center">
-							<div class="icon-bx-lg"> 
+							<div class="icon-bx-lg">
 								<i class="fa-solid fa-book icon-cell"></i>
 							</div>
 							<div class="icon-content">
-								<h2 class="dz-title counter m-b0">50,672</h2>
-								<p class="font-20">Book Collections</p>
+								<h2 class="dz-title counter m-b0">875</h2>
+								<p class="font-20">Livres</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.3s">
 						<div class="icon-bx-wraper style-2 m-b30 text-center">
-							<div class="icon-bx-lg"> 
+							<div class="icon-bx-lg">
 								<i class="fa-solid fa-store icon-cell"></i>
 							</div>
 							<div class="icon-content">
 								<h2 class="dz-title counter m-b0">1,562</h2>
-								<p class="font-20">Our Stores</p>
+								<p class="font-20">Librairies & Bibliothèques</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+					<div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.4s">
 						<div class="icon-bx-wraper style-2 m-b30 text-center">
-							<div class="icon-bx-lg"> 
+							<div class="icon-bx-lg">
 								<i class="fa-solid fa-leaf icon-cell"></i>
 							</div>
 							<div class="icon-content">
-								<h2 class="dz-title counter m-b0">457</h2>
-								<p class="font-20">Famous Writers</p>
+								<h2 class="dz-title counter m-b0">110</h2>
+								<p class="font-20">Auteurs</p>
 							</div>
 						</div>
 					</div>
@@ -384,7 +317,7 @@
 					<div class="row style-1 justify-content-xl-between justify-content-lg-center align-items-center text-xl-start text-center">
 						<div class="col-xl-7 col-lg-12">
 							<div class="section-head mb-0">
-								<h2 class="title text-white my-lg-3 mt-0">Subscribe our newsletter for newest books updates</h2>
+								<h2 class="title text-white my-lg-3 mt-0">Abonnez-vous à notre newsletter</h2>
 							</div>
 						</div>
 						<div class="col-xl-5 col-lg-6">

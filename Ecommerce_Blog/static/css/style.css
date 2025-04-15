@@ -25685,5 +25685,7 @@ footer {
 	font-size: 14px;
 	color: #333;
 }
-
+.default-select {
+        height: 20%; /* Réduit la largeur à 80% */
+    }
 /*# sourceMappingURL=style.css.map */

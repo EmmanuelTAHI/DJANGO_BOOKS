@@ -125,8 +125,8 @@
                                                     <h6 class="text-secondary">Total = {{ panier.total_panier }} FCFA</h6>
                                                 </li>
                                                 <li class="text-center d-flex">
-                                                    <a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-sm btn-primary me-2 btnhover w-100">Show cart</a>
-                                                    <a href="{% url 'e_commerce:shop-checkout' %}" class="btn btn-sm btn-outline-primary btnhover w-100">Checkout</a>
+                                                    <a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-sm btn-primary me-2 btnhover w-100">Aller au panier</a>
+                                                    <a href="{% url 'e_commerce:shop-checkout' %}" class="btn btn-sm btn-outline-primary btnhover w-100">Passer à la confirmation</a>
                                                 </li>
                                             {% else %}
                                                 <li class="cart-item text-center">
@@ -214,23 +214,12 @@
                     <form class="header-item-search">
                         <div class="input-group search-input">
                             <select class="default-select">
-                                <option>Category</option>
-                                <option>Photography</option>
-                                <option>Arts</option>
-                                <option>Adventure</option>
-                                <option>Action</option>
-                                <option>Games</option>
-                                <option>Movies</option>
-                                <option>Comics</option>
-                                <option>Biographies</option>
-                                <option>Children’s Books</option>
-                                <option>Historical</option>
-                                <option>Contemporary</option>
-                                <option>Classics</option>
-                                <option>Education</option>
+                                {% for categorie in categories %}
+                                <option>{{ categorie.nom }}</option>
+                                {% endfor %}
                             </select>
                             <input type="text" class="form-control" aria-label="Text input with dropdown button"
-                                   placeholder="Search Books Here">
+                                   placeholder="Rechercher un livre">
                             <button class="btn" type="button"><i class="flaticon-loupe"></i></button>
                         </div>
                     </form>
@@ -277,136 +266,10 @@
                             </div>
                         </form>
                         <ul class="nav navbar-nav">
-                            <li><a href="{% url 'e_commerce:index' %}"><span>Home</span></a>
-                                <!--								<ul class="sub-menu">-->
-                                <!--									<li><a href="{% url 'e_commerce:index' %}">Home 1</a></li>-->
-                                <!--									<li><a href="#">Home 2</a></li>-->
-                                <!--									<li><a href="#">Home 3</a></li>-->
-                                <!--								</ul>-->
-                            </li>
+                            <li><a href="{% url 'e_commerce:index' %}"><span>Accueil</span></a></li>
                             <li><a href="{% url 'e_commerce:about' %}">A propos</a></li>
-                            <!--							<li class="sub-menu-down"><a href="javascript:void(0);"><span>Pages</span></a>-->
-                            <!--								<ul class="sub-menu">-->
-                            <!--									<li><a href="{% url 'e_commerce:about' %}"><span>About Us</span></a></li>-->
-                            <!--									<li><a href="{% url 'e_commerce:my-profile' %}">My Profile</a></li>-->
-                            <!--									<li><a href="{% url 'e_commerce:services' %}">Services</a></li>-->
-                            <!--									<li><a href="#">FAQ's</a></li>-->
-                            <!--									<li><a href="#">Help Desk</a></li>-->
-                            <!--									<li><a href="#">Coming Soon</a></li>-->
-                            <!--									<li><a href="#">Pricing</a></li>-->
-                            <!--									<li><a href="#">Privacy Policy</a></li>-->
-                            <!--									<li><a href="#">Under Construction</a></li>-->
-                            <!--									<li><a href="#">Error 404</a></li>-->
-                            <!--								</ul>-->
-                            <!--							</li>-->
-                            <li><a href="{% url 'e_commerce:book-grid-view-sidebar' %}"><span>Shop</span></a>
-                                <!--								<ul class="sub-menu">-->
-                                <!--									<li><a href="{% url 'e_commerce:shop-grid' %}">Shop Grid</a></li>-->
-                                <!--									<li><a href="#">Shop Grid Sidebar</a></li>-->
-                                <!--									<li><a href="#">Shop List</a></li>-->
-                                <!--									<li><a href="#">Shop List Sidebar</a></li>-->
-                                <!--									<li><a href="#">Shop Detail</a></li>-->
-                                <!--									<li><a href="{% url 'e_commerce:shop-cart' %}">Cart</a></li>-->
-                                <!--									<li><a href="{% url 'e_commerce:shop-checkout' %}">Checkout</a></li>-->
-                                <!--									<li><a href="{% url 'e_commerce:wishlist' %}">Wishlist</a></li>-->
-                                <!--									<li><a href="{% url 'e_commerce:login' %}">Login</a></li>-->
-                                <!--									<li><a href="#">Registration</a></li>-->
-                                <!--								</ul>-->
-                            </li>
-                            <li><a href="{% url 'blog:blog-grid-left-sidebar' %}"><span>Blog</span></a>
-                                <!--								<ul class="sub-menu">-->
-                                <!--									<li><a href="javascript:void(0);">Page Layout <i class="fa fa-angle-right"></i></a>-->
-                                <!--										<ul class="sub-menu">-->
-                                <!--											<li><a href="javascript:void(0);">No Sidebar <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#>Blog List</a></li>-->
-                                <!--													<li><a href="#>Blog Grid</a></li>-->
-                                <!--													<li><a href="#">Blog Grid Wide</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--											<li><a href="javascript:void(0);">2 Columns <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#">Blog List</a></li>-->
-                                <!--													<li><a href="#">Blog Grid</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--											<li><a href="javascript:void(0);">3 Columns <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#">Blog List</a></li>-->
-                                <!--													<li><a href="#">Blog Grid</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--										</ul>-->
-                                <!--									</li>-->
-                                <!--									<li><a href="javascript:void(0);">Blog Sidebar <i class="fa fa-angle-right"></i></a>-->
-                                <!--										<ul class="sub-menu">-->
-                                <!--											<li><a href="javascript:void(0);">No Sidebar <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#">Blog List</a></li>-->
-                                <!--													<li><a href="#">Blog Grid</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--											<li><a href="javascript:void(0);">Left Sidebar <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#">Blog List</a></li>-->
-                                <!--													<li><a href="#">Blog Grid</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--											<li><a href="javascript:void(0);">Right Sidebar <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#">Blog List</a></li>-->
-                                <!--													<li><a href="#">Blog Grid</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--											<li><a href="javascript:void(0);">2 Sidebar <i class="fa fa-angle-right"></i></a>-->
-                                <!--												<ul class="sub-menu">-->
-                                <!--													<li><a href="#">Blog List</a></li>-->
-                                <!--													<li><a href="#">Blog Grid</a></li>-->
-                                <!--												</ul>-->
-                                <!--											</li>-->
-                                <!--										</ul>-->
-                                <!--									</li>-->
-                                <!--								</ul>-->
-                            </li>
-                            <!--							<li class="has-mega-menu sub-menu-down"><a href="javascript:void(0);">Post Layout</a>-->
-                            <!--								<ul class="mega-menu">-->
-                            <!--									<li><a href="javascript:void(0);">Side Bar</a>-->
-                            <!--										<ul>-->
-                            <!--											<li><a href="#">Post Left Sidebar</a></li>-->
-                            <!--											<li><a href="#">Post Right Sidebar</a></li>-->
-                            <!--											<li><a href="#" class="new-badge">Post Both Sidebar <span>New</span></a></li>-->
-                            <!--											<li><a href="#">Post No Sidebar</a></li>-->
-                            <!--										</ul>-->
-                            <!--									</li>-->
-                            <!--									<li> <a href="javascript:void(0);">Post Types</a>-->
-                            <!--										<ul>-->
-                            <!--											<li><a href="#" class="new-badge">Text Post <span>New</span></a></li>-->
-                            <!--											<li><a href="#"  class="new-badge">Image Post <span>New</span></a></li>-->
-                            <!--											<li><a href="#">Post Video</a></li>-->
-                            <!--											<li><a href="#">Post Link</a></li>-->
-                            <!--											<li><a href="#">Post Audio</a></li>-->
-                            <!--											<li><a href="#">Post Quote</a></li>-->
-                            <!--											<li><a href="#" class="new-badge">Tutorial Post <span>New</span></a></li>-->
-                            <!--											<li><a href="#" class="new-badge">Catalog Post <span>New</span></a></li>-->
-                            <!--										</ul>-->
-                            <!--									</li>-->
-                            <!--									<li> <a href="javascript:void(0);">Multiple Media</a>-->
-                            <!--										<ul>-->
-                            <!--											<li><a href="#" class="new-badge">Banner <span>New</span></a></li>-->
-                            <!--											<li><a href="#">Post Slide Show</a></li>-->
-                            <!--											<li><a href="#">Gallery</a></li>-->
-                            <!--											<li><a href="#" class="new-badge">Status Slider <span>New</span></a></li>-->
-                            <!--										</ul>-->
-                            <!--									</li>-->
-                            <!--									<li> <a href="javascript:void(0);">Post Layout Type</a>-->
-                            <!--										<ul>-->
-                            <!--											<li><a href="#">Standard Post </a></li>-->
-                            <!--											<li><a href="#" class="new-badge">Side Post <span>New</span></a></li>-->
-                            <!--											<li><a href="#" class="new-badge">Corner Post <span>New</span></a></li>-->
-                            <!--										</ul>-->
-                            <!--									</li>-->
-                            <!--								</ul>-->
-                            <!--							</li>-->
+                            <li><a href="{% url 'e_commerce:book-grid-view-sidebar' %}"><span>Shop</span></a></li>
+                            <li><a href="{% url 'blog:blog-grid-no-sidebar' %}"><span>Blog</span></a></li>
                             <li><a href="{% url 'e_commerce:contact' %}">Contact</a></li>
                         </ul>
                         <div class="dz-social-icon">

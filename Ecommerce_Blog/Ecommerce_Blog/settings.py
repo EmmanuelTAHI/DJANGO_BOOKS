@@ -32,7 +32,19 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+
+    'rest_framework',
+    'drf_yasg',
 ]
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,6 +133,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'emmanueltahi14@gmail.com'  # Remplace par ton email
 EMAIL_HOST_PASSWORD = 'srzc woei bgdy vens'
+DEFAULT_FROM_EMAIL = 'emmanueltahi14@gmail.com'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

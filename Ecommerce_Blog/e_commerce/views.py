@@ -4,6 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.core.paginator import Paginator
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -11,8 +12,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .form import AuthForm
-from .models import Livre, Wishlist, Panier, LignePanier
+from .models import Livre, Wishlist, Panier, LignePanier, Categorie, LigneCommande, Commande
 from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+import json
 
 
 # ==============================
@@ -28,9 +32,11 @@ def get_panier_user(request):
 def index(request):
     livres = Livre.objects.all()
     panier_user = get_panier_user(request)
+    categories = Categorie.objects.all()
     return render(request, 'e_commerce/index.html', {
         'livres': livres,
-        'panier_user': panier_user
+        'panier_user': panier_user,
+        'categories': categories
     })
 
 def about(request):
@@ -74,7 +80,7 @@ def add_to_cart(request, livre_id):
         panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
         ligne, created = LignePanier.objects.get_or_create(panier=panier, livre=livre)
         if not created:
-            ligne.quantite += 1
+            ligne.quantite += 0
             ligne.save()
             return JsonResponse({'status': 'updated', 'message': f"Quantité de {livre.titre} augmentée dans le panier."})
         return JsonResponse({'status': 'added', 'message': f"{livre.titre} ajouté au panier."})
@@ -94,7 +100,33 @@ def remove_from_cart(request, livre_id):
     return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
 
 @login_required
-@csrf_exempt  # à utiliser temporairement si AJAX bloque, sinon garde CSRF dans le POST
+def add_to_wishlist(request):
+    if request.method == 'POST':
+        livre_id = request.POST.get('livre_id')
+        try:
+            livre = Livre.objects.get(id=livre_id)
+            wishlist_item, created = Wishlist.objects.get_or_create(user=request.user, livre=livre)
+            if not created:
+                wishlist_item.delete()
+                return JsonResponse({'status': 'removed'})
+            return JsonResponse({'status': 'added'})
+        except Livre.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Livre non trouvé'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
+
+@login_required
+def remove_from_wishlist(request, livre_id):
+    if request.method == 'POST':
+        try:
+            wishlist_item = Wishlist.objects.get(user=request.user, livre_id=livre_id)
+            wishlist_item.delete()
+            return JsonResponse({'status': 'removed', 'livre_id': livre_id})
+        except Wishlist.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': "Article introuvable"}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
+
+@login_required
+@csrf_exempt
 def update_quantity(request):
     if request.method == 'POST':
         livre_id = request.POST.get('livre_id')
@@ -113,10 +145,121 @@ def update_quantity(request):
 @login_required
 def shop_checkout(request):
     panier, created = Panier.objects.get_or_create(user=request.user, defaults={'statut': 'en cours'})
-    items = panier.items.select_related('livre')  # Récupère les articles du panier
-    total = sum(item.total() for item in items)  # Calcule le total du panier
-    frais_expedition = 1500  # Frais d'expédition fixes (ou dynamiques selon ton cas)
-    total_general = total + frais_expedition  # Calcule le total général
+    items = panier.items.select_related('livre')
+    total = sum(item.total() for item in items)
+    frais_expedition = 1500
+    total_general = total + frais_expedition
+
+    if not items:
+        messages.error(request, "Votre panier est vide.")
+        return redirect('e_commerce:index')
+
+    if request.method == 'POST':
+        country = request.POST.get('country')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        city = request.POST.get('city')
+        address = request.POST.get('address')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        payment_method = request.POST.get('payment_method')
+        card_holder = request.POST.get('card_holder')
+        card_number = request.POST.get('card_number')
+        card_expiry = request.POST.get('card_expiry')
+        card_cvv = request.POST.get('card_cvv')
+        operator = request.POST.get('operator')
+        phone_number = request.POST.get('phone_number')
+
+        errors = []
+        if not country:
+            errors.append("Veuillez sélectionner un pays.")
+        if not first_name:
+            errors.append("Veuillez entrer votre prénom.")
+        if not last_name:
+            errors.append("Veuillez entrer votre nom.")
+        if not city:
+            errors.append("Veuillez entrer une ville.")
+        if not address:
+            errors.append("Veuillez entrer une adresse.")
+        if not email or '@' not in email:
+            errors.append("Veuillez entrer un email valide.")
+        if not phone:
+            errors.append("Veuillez entrer un numéro de téléphone.")
+        if not payment_method:
+            errors.append("Veuillez sélectionner un mode de paiement.")
+        if payment_method == 'credit-card':
+            if not card_holder:
+                errors.append("Veuillez entrer le nom du titulaire de la carte.")
+            if not card_number or len(card_number.replace(' ', '')) < 16:
+                errors.append("Veuillez entrer un numéro de carte valide.")
+            if not card_expiry:
+                errors.append("Veuillez entrer une date d'expiration.")
+            if not card_cvv or len(card_cvv) < 3:
+                errors.append("Veuillez entrer un CVV valide.")
+        elif payment_method == 'mobile-money':
+            if not operator:
+                errors.append("Veuillez sélectionner un opérateur mobile.")
+            if not phone_number:
+                errors.append("Veuillez entrer un numéro pour le paiement mobile.")
+
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+            return render(request, 'e_commerce/shop-checkout.html', {
+                'items': items,
+                'total': total,
+                'frais_expedition': frais_expedition,
+                'total_general': total_general,
+            })
+
+        full_address = f"{first_name} {last_name}, {address}, {city}, {country}"
+        order = Commande.objects.create(
+            user=request.user,
+            adresse_livraison=full_address,
+            statut='en_attente',
+        )
+
+        for item in items:
+            LigneCommande.objects.create(
+                commande=order,
+                livre=item.livre,
+                quantite=item.quantite,
+                prix_unitaire=item.livre.prix
+            )
+
+        context = {
+            'order': order,
+            'items': items,
+            'total': total,
+            'frais_expedition': frais_expedition,
+            'total_general': total_general,
+            'adresse_livraison': full_address,
+            'email': email,
+            'phone': phone,
+            'payment_method': payment_method,
+        }
+        subject = 'Confirmation de votre commande'
+        html_message = render_to_string('e_commerce/email_order_confirmation.html', context)
+        plain_message = f"Votre commande a été confirmée. Total: {total_general} FCFA."
+
+        try:
+            send_mail(
+                subject,
+                plain_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+        except Exception as e:
+            messages.error(request, f"Erreur lors de l'envoi de l'email : {str(e)}")
+
+        items.delete()
+        panier.statut = 'terminé'
+        panier.save()
+
+        messages.success(request, "Commande validée ! Un email de confirmation a été envoyé.")
+        return redirect('e_commerce:index')
 
     return render(request, 'e_commerce/shop-checkout.html', {
         'items': items,
@@ -136,30 +279,6 @@ def wishlist(request):
         return render(request, 'e_commerce/wishlist.html', context)
     else:
         return render(request, 'e_commerce/wishlist.html', {'wishlist_items': []})
-
-@login_required
-def add_to_wishlist(request):
-    if request.method == 'POST':
-        livre_id = request.POST.get('livre_id')
-        try:
-            livre = Livre.objects.get(id=livre_id)
-            wishlist_item, created = Wishlist.objects.get_or_create(user=request.user, livre=livre)
-            if not created:
-                wishlist_item.delete()
-                return JsonResponse({'status': 'removed'})
-            return JsonResponse({'status': 'added'})
-        except Livre.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'Livre non trouvé'}, status=404)
-    return JsonResponse({'status': 'error', 'message': 'Requête invalide'}, status=400)
-
-@login_required
-def remove_from_wishlist(request, livre_id):
-    try:
-        wishlist_item = Wishlist.objects.get(user=request.user, livre_id=livre_id)
-        wishlist_item.delete()
-    except Wishlist.DoesNotExist:
-        pass
-    return redirect('e_commerce:wishlist')
 
 # ==============================
 # 📚 Pages Livres
@@ -181,20 +300,19 @@ def book_grid_left_sidebar(request):
     livres = Livre.objects.all()
     return render(request, 'e_commerce/books-grid-left-sidebar.html', {'livres': livres})
 
-def book_grid_no_sidebar(request):
-    livres = Livre.objects.all()
-    return render(request, 'e_commerce/books-grid-no-sidebar.html', {'livres': livres})
-
 def book_list_view_sidebar(request):
     livres = Livre.objects.all()
     return render(request, 'e_commerce/books-list-view-sidebar.html', {'livres': livres})
 
 def book_grid_view_sidebar(request):
     livres = Livre.objects.all()
+    paginator = Paginator(livres, 9)  # Pagination : 9 articles par page
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     wishlist_ids = []
     if request.user.is_authenticated:
         wishlist_ids = Wishlist.objects.filter(user=request.user).values_list('livre_id', flat=True)
-    return render(request, 'e_commerce/books-grid-view-sidebar.html', {'livres': livres, 'wishlist_ids': wishlist_ids})
+    return render(request, 'e_commerce/books-grid-view-sidebar.html', {'livres': page_obj, 'wishlist_ids': wishlist_ids})
 
 # ==============================
 # 🔐 Authentification
@@ -263,3 +381,8 @@ def activate_account(request, uidb64, token):
         login(request, user)
         return redirect("e_commerce:index")
     return render(request, "registration/activation_failed.html")
+
+# Suppression de process_order car on n'utilise plus AJAX
+# @csrf_exempt
+# def process_order(request):
+#     ... (code supprimé car géré dans shop_checkout)

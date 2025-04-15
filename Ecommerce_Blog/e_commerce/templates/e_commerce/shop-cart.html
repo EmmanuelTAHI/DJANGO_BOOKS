@@ -10,7 +10,7 @@
 						<h1>Cart</h1>
 						<nav aria-label="breadcrumb" class="breadcrumb-row">
 							<ul class="breadcrumb">
-								<li class="breadcrumb-item"><a href="{% url 'e_commerce:index' %}">Home</a></li>
+								<li class="breadcrumb-item"><a href="{% url 'e_commerce:index' %}">Accueil</a></li>
 								<li class="breadcrumb-item">Cart</li>
 							</ul>
 						</nav>
@@ -29,12 +29,12 @@
 							<table class="table check-tbl">
 								<thead>
 									<tr>
-										<th>Product</th>
-										<th>Product name</th>
-										<th>Unit Price</th>
-										<th>Quantity</th>
+										<th>Couverture</th>
+										<th>Titre</th>
+										<th>Prix</th>
+										<th>Quantité</th>
 										<th>Total</th>
-										<th class="text-end">Close</th>
+										<th class="text-end">Retirer</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -102,9 +102,27 @@ $(document).ready(function() {
 	// Fonction pour recalculer le prix total global et le total final
 	function updateGlobalTotals() {
 		let totalLivres = 0;
+		let ligneProduit = $('.product-item-totle');
 
-		// Parcourir chaque ligne de livre
-		$('.product-item-totle').each(function() {
+		// Vérifie si le panier est vide
+		if (ligneProduit.length === 0) {
+			// Panier vide
+			$('td:contains("Prix total")').next().text('0 FCFA');
+			$('#frais-expedition').text('0 FCFA');
+			$('#total-general').text('0 FCFA');
+
+			// Désactiver le bouton
+			let bouton = $('.btn.btn-primary.btnhover');
+			bouton.addClass('disabled');
+			bouton.css({
+				'pointer-events': 'none',
+				'opacity': '0.6'
+			});
+			return;
+		}
+
+		// Sinon, recalculer les totaux
+		ligneProduit.each(function() {
 			const text = $(this).text().replace(' FCFA', '').replace(',', '.');
 			const prix = parseInt(text);
 			if (!isNaN(prix)) {
@@ -115,12 +133,21 @@ $(document).ready(function() {
 		// Met à jour le prix total
 		$('td:contains("Prix total")').next().text(totalLivres.toFixed(2) + ' FCFA');
 
-		// Récupère les frais d’expédition (1500 FCFA par défaut ici)
-		const fraisExpedition = 1500;
+		// Définir les frais d’expédition
+		let fraisExpedition = 1500;
+		$('#frais-expedition').text(fraisExpedition + ' FCFA');
 
 		// Met à jour le total final
 		const totalFinal = totalLivres + fraisExpedition;
-		$('td:contains("Total")').next().text(totalFinal.toFixed(2) + ' FCFA');
+		$('#total-general').text(totalFinal.toFixed(2) + ' FCFA');
+
+		// Réactiver le bouton si nécessaire
+		let bouton = $('.btn.btn-primary.btnhover');
+		bouton.removeClass('disabled');
+		bouton.css({
+			'pointer-events': 'auto',
+			'opacity': '1'
+		});
 	}
 
 	// Capter le clic sur les boutons + ou -
@@ -166,6 +193,18 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	// Si un article est retiré manuellement, on met à jour les totaux
+	$('.remove-from-cart-btn').on('click', function(e) {
+		e.preventDefault();
+		const row = $(this).closest('tr');
+		row.remove(); // Supprime la ligne localement
+		updateGlobalTotals(); // Recalcule
+	});
+
+	// Appeler une première fois au chargement
+	updateGlobalTotals();
 });
 </script>
+
 {% endblock content %}

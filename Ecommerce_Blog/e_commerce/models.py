@@ -38,6 +38,7 @@ class Livre(models.Model):
         ('Hardcover', 'Hardcover'),
         ('Ebook', 'Ebook'),
         ('Audiobook', 'Audiobook'),
+        ('Broche','Broche')
     ]
 
     LANGUE_CHOICES = [
@@ -62,7 +63,7 @@ class Livre(models.Model):
     prix = models.IntegerField()
     stock = models.PositiveIntegerField(default=0)
 
-    categorie_ids = models.ForeignKey(Categorie, on_delete=models.SET_NULL, null=True, related_name='livres')
+    categorie_ids = models.ForeignKey(Categorie, on_delete=models.SET_NULL, null=True)
     tags_ids = models.ManyToManyField(Tag, blank=True)
 
     description = models.TextField(blank=True)
@@ -130,6 +131,9 @@ class LignePanier(models.Model):
     panier = models.ForeignKey(Panier, on_delete=models.CASCADE, related_name='items')
     livre = models.ForeignKey(Livre, on_delete=models.CASCADE)
     quantite = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        unique_together = ('panier', 'livre')  # Ajouter cette contrainte d'unicité
 
     def total(self):
         return self.livre.prix * self.quantite

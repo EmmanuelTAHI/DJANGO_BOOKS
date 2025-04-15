@@ -8,32 +8,25 @@
 		<div class="main-slider style-1"> 
 			<div class="main-swiper">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide bg-blue" style="background-image: url({% static 'images/background/background_main1920_940.png' %});">
+					<div class="swiper-slide bg-blue" style="background-image: url('{% static 'images/background/background_main1920_940.png' %}');">
 						<div class="container">
 							<div class="banner-content">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="swiper-content">
 											<div class="content-info">
-												<h6 class="sub-title" data-swiper-parallax="-10">BEST MANAGEMENT </h6>
-												<h1 class="title mb-0" data-swiper-parallax="-20">Think and Grow Rich</h1>
+												<h6 class="sub-title" data-swiper-parallax="-10">BOOK LAND</h6>
+												<h1 class="title mb-0" data-swiper-parallax="-20">LES MEILLEURS EN TERMES DE LITTERATURE</h1>
 												<ul class="dz-tags" data-swiper-parallax="-30">
-													<li><a href="javascript:void(0);">Napoleon Hill</a></li>
-													<li><a href="javascript:void(0);">Business & Strategy</a></li>
+													<li><a href="javascript:void(0);">Authentiques</a></li>
+													<li><a href="javascript:void(0);"></a></li>
 												</ul>
-												<p class="text mb-0" data-swiper-parallax="-40">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+												<p class="text mb-0" data-swiper-parallax="-40">Nous vous proposons une large sélection d’ouvrages adaptés à tous les goûts : romans, essais, livres jeunesse, manuels scolaires, et bien plus. Grâce à un système de vente en ligne simple et efficace, les lecteurs peuvent parcourir les rayons virtuels, ajouter leurs livres préférés à leur panier ou à leur liste de souhaits, puis finaliser leur commande en quelques clics.</p>
 												<div class="price" data-swiper-parallax="-50">
-													<span class="price-num">$17.2</span>
-													<del>$15.25</del>
-													<span class="badge badge-danger">15% OFF</span>
-												</div>
-												<div class="content-btn" data-swiper-parallax="-60">
-													<a class="btn btn-primary btnhover" href="{% url 'e_commerce:shop-grid' %}">Buy Now</a>
-													<a class="btn border btnhover ms-4 text-white" href="#">See Details</a>
 												</div>
 											</div>
 											<div class="partner">
-												<p>Our partner</p>
+												<p>Nos partenaires</p>
 												<div class="brand-logo">
 													<img src="{% static 'images/partner/partner-1.png' %}" alt="client">
 													<img class="mid-logo" src="{% static 'images/partner/partner-2.png' %}" alt="client">
@@ -44,53 +37,8 @@
 									</div>
 									<div class="col-md-6">
 										<div class="banner-media" data-swiper-parallax="-100">
-											<img src="{% static 'images/banner/banner-media.png' %}" alt="banner-media">
+											<img src="{% static 'images/banner/main_image.jpg' %}" alt="banner-media1">
 										</div>
-										<img class="pattern" src="{% static 'images/Group.png' %}" data-swiper-parallax="-100" alt="dots">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide bg-blue" style="background-image: url({% static 'images/background/background_main1920_940.png' %});">
-						<div class="container">
-							<div class="banner-content">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="swiper-content">
-											<div class="content-info">
-												<h6 class="sub-title" data-swiper-parallax="-10">BEST SELLER</h6>
-												<h1 class="title mb-0" data-swiper-parallax="-20">Pushing Clouds</h1>
-												<ul class="dz-tags" data-swiper-parallax="-30">
-													<li><a href="javascript:void(0);">Napoleon Hill</a></li>
-													<li><a href="javascript:void(0);">Business & Strategy</a></li>
-												</ul>
-												<p class="text mb-0" data-swiper-parallax="-40">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
-												<div class="price" data-swiper-parallax="-50">
-													<span class="price-num">$9.5</span>
-													<del>$12.0</del>
-													<span class="badge badge-danger">20% OFF</span>
-												</div>
-												<div class="content-btn" data-swiper-parallax="-50">
-													<a class="btn btn-primary btnhover" href="{% url 'e_commerce:shop-grid' %}">Buy Now</a>
-													<a class="btn border btnhover ms-4 text-white" href="#">See Details</a>
-												</div>
-											</div>
-											<div class="partner">
-												<p>Our partner</p>
-												<div class="brand-logo">
-													<img src="{% static 'images/partner/partner-1.png' %}" alt="client">
-													<img class="mid-logo" src="{% static 'images/partner/partner-2.png' %}" alt="client">
-													<img src="{% static 'images/partner/partner-3.png' %}" alt="client">
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="banner-media" data-swiper-parallax="-100">
-											<img src="{% static 'images/banner/banner-media2.png' %}" alt="banner-media1">
-										</div>
-										<img class="pattern" src="{% static 'images/Group.png' %}" data-swiper-parallax="-100" alt="dots">
 									</div>
 								</div>
 							</div>
@@ -103,114 +51,7 @@
 			</div>
 			<div class="swiper main-swiper-thumb">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<div class="books-card">
-							<div class="dz-media">
-								<img src="{% static 'images/books/book16.png' %}" alt="book">
-							</div>
-							<div class="dz-content">
-								<h5 class="title mb-0">Think and Grow Rich</h5>
-								<div class="dz-meta">
-									<ul>
-										<li>by Napoleon Hill</li>
-									</ul>
-								</div>
-								<div class="book-footer">
-									<div class="price">
-										<span class="price-num">$9.5</span>
-									</div>
-									<div class="rate">
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="books-card">
-							<div class="dz-media">
-								<img src="{% static 'images/books/grid/book9.jpg' %}" alt="book">
-							</div>
-							<div class="dz-content">
-								<h5 class="title mb-0">Pushing Clouds</h5>
-								<div class="dz-meta">
-									<ul>
-										<li>by Jamet Sigh</li>
-									</ul>
-								</div>
-								<div class="book-footer">
-									<div class="price">
-										<span class="price-num">$5.7</span>
-									</div>
-									<div class="rate">
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-muted"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="books-card">
-							<div class="dz-media">
-								<img src="{% static 'images/books/book16.png' %}" alt="book">
-							</div>
-							<div class="dz-content">
-								<h5 class="title mb-0">Think and Grow Rich</h5>
-								<div class="dz-meta">
-									<ul>
-										<li>by Napoleon Hill</li>
-									</ul>
-								</div>
-								<div class="book-footer">
-									<div class="price">
-										<span class="price-num">$9.5</span>
-									</div>
-									<div class="rate">
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="books-card">
-							<div class="dz-media">
-								<img src="{% static 'images/books/grid/book9.jpg' %}" alt="book">
-							</div>
-							<div class="dz-content">
-								<h5 class="title mb-0">Pushing Clouds</h5>
-								<div class="dz-meta">
-									<ul>
-										<li>by Jamet Sigh</li>
-									</ul>
-								</div>
-								<div class="book-footer">
-									<div class="price">
-										<span class="price-num">$5.7</span>
-									</div>
-									<div class="rate">
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-yellow"></i>
-										<i class="flaticon-star text-muted"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -237,8 +78,8 @@
 		<section class="content-inner-1 bg-grey reccomend">
 			<div class="container">
 				<div class="section-head text-center">
-					<h2 class="title">Recomended For You</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+					<h2 class="title">Recommandé pour vous</h2>
+					<p>Plongez dans des récits captivants qui vous emmènent au cœur de l’Afrique, à la découverte de ses cultures, de ses paysages et de ses histoires fascinantes, pour le seul plaisir de lire et de voyager par l’imaginaire.</p>
 				</div>
 				<!-- Swiper -->
 				<div class="swiper-container swiper-two overflow-hidden">
@@ -251,7 +92,7 @@
 								</div>
 								<div class="dz-content">
 									<a href="{% url 'e_commerce:book-detail' livre.id %}">
-										<h4 class="title">{{ livre.titre|truncatechars:15 }}</h4>
+										<h4 class="title">{{ livre.titre|truncatechars:14 }}</h4>
 									</a>
 									<span class="price">{{ livre.prix }} FCFA</span>
 									<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-secondary btnhover btnhover2"><i class="flaticon-shopping-cart-1 m-r10"></i> Ajouter au panier</a>
@@ -275,7 +116,7 @@
 							</div>
 							<div class="icon-content">
 								<h5 class="dz-title m-b10">Livraison rapide</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+								<p>Recevez vos livres en un temps record, où que vous soyez.</p>
 							</div>
 						</div>
 					</div>
@@ -286,7 +127,7 @@
 							</div>
 							<div class="icon-content">
 								<h5 class="dz-title m-b10">Paiement sécurisé</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+								<p>Effectuez vos achats en toute confiance grâce à nos méthodes de paiement sûres.</p>
 							</div>
 						</div>
 					</div>
@@ -297,7 +138,7 @@
 							</div>
 							<div class="icon-content">
 								<h5 class="dz-title m-b10">Livres authentiques</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+								<p>Une sélection rigoureuse de livres originaux et de qualité garantie.</p>
 							</div>
 						</div>
 					</div>
@@ -308,7 +149,7 @@
 							</div>
 							<div class="icon-content">
 								<h5 class="dz-title m-b10">Retour garanti</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+								<p>Changez d’avis ? Aucun souci, vos retours sont simples et garantis.</p>
 							</div>
 						</div>
 					</div>
@@ -337,7 +178,7 @@
 									<img src="{{ livre.couverture.url }}" alt="book">
 								</div>
 								<div class="dz-content">
-									<h5 class="title"><a href="{% url 'e_commerce:shop-grid' %}">{{ livre.titre|truncatechars:20 }}</a></h5>
+									<h5 class="title"><a href="{% url 'e_commerce:shop-grid' %}">{{ livre.titre|truncatechars:17 }}</a></h5>
 									<ul class="dz-tags">
 										{% for tag in livre.tags_ids.all %}
 										<li><a href="{% url 'e_commerce:shop-grid' %}">{{ tag.nom }},</a></li>
@@ -368,8 +209,7 @@
 			<div class="container">
 				<div class="section-head text-center">
 					<div class="circle style-1"></div>
-					<h2 class="title">Produit en vedette</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
+					<h2 class="title">Livres en vedette</h2>
 				</div>
 			</div>
 			<div class="container">
@@ -379,23 +219,21 @@
 						<div class="swiper-slide">
 							<div class="books-card style-2">
 								<div class="dz-media">
-									<img src="{% static 'images/books/large/bigbook2.jpg' %}" alt="book">
+									<img src="{{ livre.couverture.url }}" alt="book">
 								</div>
 								<div class="dz-content">
-									<h6 class="sub-title">BEST SELLER</h6>
+									<h6 class="sub-title">MEILLEURE VENTE</h6>
 									<h2 class="title">{{ livre.titre }}</h2>
 									<ul class="dz-tags">
 										<li>{{ tag.nom }}</li>
 									</ul>
-									<p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
+									<p class="text">{{ livre.description|truncatechars:200 }}</p>
 									<div class="price">
-										<span class="price-num">$9.5</span>
-										<del>$12.0</del>
-										<span class="badge">20% OFF</span>
+										<span class="price-num">{{ livre.prix }} FCFA</span>
 									</div>
 									<div class="bookcard-footer">
-										<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-primary btnhover m-t15 m-r10">Buy Now</a>
-										<a href="{% url 'e_commerce:book-detail' livre.id %}" class="btn btn-outline-secondary btnhover m-t15">See Details</a>
+										<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-primary btnhover m-t15 m-r10">Ajouter au panier</a>
+										<a href="{% url 'e_commerce:book-detail' livre.id %}" class="btn btn-outline-secondary btnhover m-t15">Details</a>
 									</div>
 								</div>
 							</div>
@@ -411,50 +249,6 @@
 			</div>
 		</section>
 		<!-- Feature Product End -->
-
-		<!-- Special Offer-->
-		<section class="content-inner-2">
-			<div class="container">
-				<div class="section-head book-align">
-					<h2 class="title mb-0">Offres spéciales</h2>
-					<div class="pagination-align style-1">
-						<div class="book-button-prev swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
-						<div class="book-button-next swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
-					</div>
-				</div>
-				<div class="swiper-container book-swiper overflow-hidden">
-					<div class="swiper-wrapper">
-						{% for livre in livres %}
-						<div class="swiper-slide">
-							<div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.5s">
-								<div class="dz-media">
-									<a href="{% url 'e_commerce:book-detail' livre.id %}"><img src="{% static 'images/blog/blog5.jpg' %}" alt="/"></a>
-								</div>
-								<div class="dz-info">
-									<h4 class="dz-title"><a href="{% url 'e_commerce:book-detail' livre.id %}">Terrible Madness</a></h4>
-									<div class="dz-tags">
-										<ul>
-											<li><a href="{% url 'e_commerce:book-detail' livre.id %}">BIOGRAPHY</a></li>
-											<li><a href="{% url 'e_commerce:book-detail' livre.id %}">THRILLER</a></li>
-											<li><a href="{% url 'e_commerce:book-detail' livre.id %}">HORROR</a></li>
-										</ul>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-									<div class="bookcard-footer">
-										<a href="{% url 'e_commerce:shop-cart' %}" class="btn btn-primary m-t15 btnhover btnhover2"><i class="flaticon-shopping-cart-1 m-r10"></i> Ajouter au panier</a>
-										<div class="price-details">
-											$18,78 <del>$25</del>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						{% endfor %}
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Special Offer End -->
 
 		<!-- Testimonial -->
 		<section class="content-inner-2 testimonial-wrapper">
@@ -492,8 +286,7 @@
 										<img src="{% static 'images/testimonial/testimonial1.jpg' %}" alt="">
 									</div>
 									<div class="info-right">
-										<h6 class="testimonial-name">Jason Huang</h6>
-										<span class="testimonial-position">Book Lovers</span>
+										<h6 class="testimonial-name">Serges Marus</h6>
 									</div>
 								</div>
 							</div>
@@ -518,7 +311,6 @@
 									</div>
 									<div>
 										<h6 class="testimonial-name">Miranda Lee</h6>
-										<span class="testimonial-position">Book Lovers</span>
 									</div>
 								</div>
 							</div>
@@ -543,7 +335,6 @@
 									</div>
 									<div>
 										<h6 class="testimonial-name">Steve Henry</h6>
-										<span class="testimonial-position">Book Lovers</span>
 									</div>
 								</div>
 							</div>
@@ -568,7 +359,6 @@
 									</div>
 									<div>
 										<h6 class="testimonial-name">Angela Moss</h6>
-										<span class="testimonial-position">Book Lovers</span>
 									</div>
 								</div>
 							</div>
@@ -593,7 +383,6 @@
 									</div>
 									<div>
 										<h6 class="testimonial-name">Miranda Lee</h6>
-										<span class="testimonial-position">Book Lovers</span>
 									</div>
 								</div>
 							</div>
@@ -618,7 +407,6 @@
 									</div>
 									<div class="info-right">
 										<h6 class="testimonial-name">Jason Huang</h6>
-										<span class="testimonial-position">Book Lovers</span>
 									</div>
 								</div>
 							</div>
@@ -628,93 +416,6 @@
 			</div>
 		</section>
 		<!-- Testimonial End -->
-
-		<!-- Latest News -->
-		<section class="content-inner-2">
-			<div class="container">
-				<div class="section-head text-center">
-					<h2 class="title">Dernières nouveautés</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-				</div>
-				<div class="swiper-container blog-swiper overflow-hidden">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.1s" >
-								<div class="dz-media">
-									<a href="{% url 'blog:blog-detail' %}"><img src="{% static 'images/blog/grid/blog2.jpg' %}" alt="/"></a>
-								</div>
-								<div class="dz-info p-3">
-									<h6 class="dz-title">
-										<a href="{% url 'blog:blog-detail' %}">Benefits of reading: Smart, Diligent, Happy, Intelligent</a>
-									</h6>
-									<p class="m-b0">Lorem ipsum dolor sit amet, consectetur adipiscing do eiusmod tempor</p>
-									<div class="dz-meta meta-bottom mt-3 pt-3">
-										<ul class="">
-											<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>24 March, 2024</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.2s">
-								<div class="dz-media">
-									<a href="{% url 'blog:blog-detail' %}"><img src="{% static 'images/blog/grid/blog2.jpg' %}" alt="/"></a>
-								</div>
-								<div class="dz-info p-3">
-									<h6 class="dz-title">
-										<a href="{% url 'blog:blog-detail' %}">10 Things you must know to improve your reading skills</a>
-									</h6>
-									<p class="m-b0">Lorem ipsum dolor sit amet, consectetur adipiscing do eiusmod tempor</p>
-									<div class="dz-meta meta-bottom mt-3 pt-3">
-										<ul class="">
-											<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>18 July, 2024</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.3s">
-								<div class="dz-media">
-									<a href="{% url 'blog:blog-detail' %}"><img src="{% static 'images/blog/grid/blog2.jpg' %}" alt="/"></a>
-								</div>
-								<div class="dz-info p-3">
-									<h6 class="dz-title">
-										<a href="{% url 'blog:blog-detail' %}">Benefits of reading: Smart, Diligent, Happy, Intelligent</a>
-									</h6>
-									<p class="m-b0">Lorem ipsum dolor sit amet, consectetur adipiscing do eiusmod tempor</p>
-									<div class="dz-meta meta-bottom mt-3 pt-3">
-										<ul class="">
-											<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>7 June, 2024</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="dz-blog style-1 bg-white m-b30 wow fadeInUp" data-wow-delay="0.4s">
-								<div class="dz-media">
-									<a href="{% url 'blog:blog-detail' %}"><img src="{% static 'images/blog/grid/blog2.jpg' %}" alt="/"></a>
-								</div>
-								<div class="dz-info p-3">
-									<h6 class="dz-title">
-										<a href="{% url 'blog:blog-detail' %}">We Must know why reading is important for children?</a>
-									</h6>
-									<p class="m-b0">Lorem ipsum dolor sit amet, consectetur adipiscing do eiusmod tempor</p>
-									<div class="dz-meta meta-bottom mt-3 pt-3">
-										<ul class="">
-											<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>30 May, 2024</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Latest News End -->
 
 		<!-- Feature Box -->
 		<section class="content-inner">
@@ -726,8 +427,8 @@
 								<i class="fa-solid fa-users icon-cell"></i>
 							</div>
 							<div class="icon-content">
-								<h2 class="dz-title counter m-b0">125,663</h2>
-								<p class="font-20">Happy Customers</p>
+								<h2 class="dz-title counter m-b0">22,745</h2>
+								<p class="font-20">Utilisateurs satisfaits</p>
 							</div>
 						</div>
 					</div>
@@ -737,8 +438,8 @@
 								<i class="fa-solid fa-book icon-cell"></i>
 							</div>
 							<div class="icon-content">
-								<h2 class="dz-title counter m-b0">50,672</h2>
-								<p class="font-20">Book Collections</p>
+								<h2 class="dz-title counter m-b0">875</h2>
+								<p class="font-20">Livres</p>
 							</div>
 						</div>
 					</div>
@@ -749,7 +450,7 @@
 							</div>
 							<div class="icon-content">
 								<h2 class="dz-title counter m-b0">1,562</h2>
-								<p class="font-20">Our Stores</p>
+								<p class="font-20">Librairies & Bibliothèques</p>
 							</div>
 						</div>
 					</div>
@@ -759,8 +460,8 @@
 								<i class="fa-solid fa-leaf icon-cell"></i>
 							</div>
 							<div class="icon-content">
-								<h2 class="dz-title counter m-b0">457</h2>
-								<p class="font-20">Famous Writers</p>
+								<h2 class="dz-title counter m-b0">110</h2>
+								<p class="font-20">Auteurs</p>
 							</div>
 						</div>
 					</div>
@@ -776,7 +477,7 @@
 					<div class="row style-1 justify-content-xl-between justify-content-lg-center align-items-center text-xl-start text-center">
 						<div class="col-xl-7 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
 							<div class="section-head mb-0">
-								<h2 class="title text-white my-lg-3 mt-0">Subscribe our newsletter for newest books updates</h2>
+								<h2 class="title text-white my-lg-3 mt-0">Abonnez-vous à notre newsletter</h2>
 							</div>
 						</div>
 						<div class="col-xl-5 col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
