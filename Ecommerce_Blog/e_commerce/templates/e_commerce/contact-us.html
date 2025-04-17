@@ -80,17 +80,7 @@
                             {% csrf_token %}
                             <input type="hidden" class="form-control" name="dzToDo" value="Contact">
 
-                            <div class="dzFormMsg">
-                                {% if messages %}
-                                {% for message in messages %}
-                                <div class="alert alert-{% if message.tags == 'success' %}success{% else %}danger{% endif %} alert-dismissible fade show"
-                                     role="alert">
-                                    {{ message }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
+                            <div class="dzFormMsg"></div>
 
                             <div class="input-group mb-3">
                                 <input required type="text" class="form-control" name="dzName" placeholder="Nom">
@@ -118,7 +108,7 @@
                             </div>
 
                             <div>
-                                <button name="submit" type="submit" value="submit" class="btn w-100 btn-primary btnhover">ENVOYER</button>
+                                <button name="submit" type="submit" value="submit" class="btn w-100 btn-primary btnhover" id="submit-btn">ENVOYER</button>
                             </div>
                         </form>
                     </div>
@@ -219,6 +209,8 @@
 </div>
 
 <script>
+let isSubmitting = false;
+
 document.getElementById('refresh-captcha').addEventListener('click', function() {
     fetch("{% url 'e_commerce:refresh_captcha' %}", {
         method: 'GET',
@@ -228,18 +220,75 @@ document.getElementById('refresh-captcha').addEventListener('click', function() 
     })
     .then(response => response.json())
     .then(data => {
-        // Mettre à jour l'image du CAPTCHA
         document.getElementById('captcha-image').src = data.captcha_image;
-        // Mettre à jour le hashkey
         document.getElementById('captcha-hashkey').value = data.captcha_hashkey;
-        // Vider le champ de saisie du CAPTCHA
         document.querySelector('input[name="captcha"]').value = '';
     })
     .catch(error => {
         console.error('Erreur lors du rafraîchissement du CAPTCHA:', error);
     });
 });
-</script>
 
-<script src="https://www.google.com/recaptcha/api.js"></script>
+document.querySelector('.dzForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    const form = this;
+    const submitBtn = document.getElementById('submit-btn');
+    const formMsg = document.querySelector('.dzFormMsg');
+
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Submitting...';
+
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        formMsg.innerHTML = '';
+        if (data.success) {
+            formMsg.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                ${data.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`;
+            form.reset();
+            fetch("{% url 'e_commerce:refresh_captcha' %}", {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('captcha-image').src = data.captcha_image;
+                document.getElementById('captcha-hashkey').value = data.captcha_hashkey;
+            });
+        } else {
+            formMsg.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${data.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`;
+        }
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'ENVOYER';
+        isSubmitting = false;
+    })
+    .catch(error => {
+        formMsg.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Erreur lors de l'envoi du formulaire.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'ENVOYER';
+        isSubmitting = false;
+        console.error('Erreur:', error);
+    });
+});
+</script>
 {% endblock content %}

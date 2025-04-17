@@ -59,9 +59,13 @@ def contact(request):
         try:
             captcha_obj = CaptchaStore.objects.get(hashkey=captcha_hashkey)
             if captcha_obj.response.lower() != user_captcha.lower():
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({'success': False, 'message': 'Code CAPTCHA invalide.'})
                 messages.error(request, "Code CAPTCHA invalide.")
                 return redirect('e_commerce:contact')
         except CaptchaStore.DoesNotExist:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'message': 'Erreur de validation du CAPTCHA.'})
             messages.error(request, "Erreur de validation du CAPTCHA.")
             return redirect('e_commerce:contact')
 
@@ -82,11 +86,16 @@ def contact(request):
                 recipient_list=[settings.CONTACT_EMAIL],
                 fail_silently=False,
             )
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({'success': True, 'message': 'Votre message a été envoyé avec succès !'})
             messages.success(request, "Votre message a été envoyé avec succès !")
             return redirect('e_commerce:contact')
         except Exception as e:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'message': 'Erreur lors de l\'envoi de votre message.'})
             messages.error(request, "Erreur lors de l'envoi de votre message.")
             print(f"Erreur e-mail: {e}")
+            return redirect('e_commerce:contact')
 
     # Génération d’un nouveau CAPTCHA à l’affichage initial
     new_captcha_key = CaptchaStore.generate_key()
