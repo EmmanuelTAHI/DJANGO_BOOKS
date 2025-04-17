@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Article, Commentaire
 from django.http import HttpResponseForbidden
+from django.contrib import messages
 from .forms import CommentaireForm
 from django.utils import timezone
 
@@ -23,15 +24,20 @@ def blog_detail(request, slug):
     # Formulaire de commentaire
     form = CommentaireForm(request.POST or None)
 
-    if request.method == 'POST' and request.user.is_authenticated:
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request, "Vous devez être connecté pour commenter.")
+            return redirect('blog:blog-detail', slug=slug)
+
         if form.is_valid():
             commentaire = form.save(commit=False)
             commentaire.article = article
             commentaire.auteur_id = request.user
             commentaire.save()
+            messages.success(request, "Votre commentaire a été ajouté avec succès !")
             return redirect('blog:blog-detail', slug=slug)
         else:
-            return HttpResponseForbidden("Le commentaire ne peut pas être vide.")
+            messages.error(request, "Erreur dans le formulaire. Vérifiez votre commentaire.")
 
     context = {
         'article': article,

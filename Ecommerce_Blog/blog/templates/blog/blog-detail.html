@@ -65,6 +65,16 @@
 								</div>
 							</div>
 						</div>
+						{% if messages %}
+						<div class="messages">
+							{% for message in messages %}
+							<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+								{{ message }}
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							{% endfor %}
+						</div>
+						{% endif %}
 						<div class="clear" id="comment-list">
 							<div class="post-comments comments-area style-1 clearfix">
 								<h4 class="comments-title">Commentaires</h4>
@@ -101,11 +111,13 @@
 											{% csrf_token %}
 											{% if user.is_authenticated %}
 											<p class="comment-form-author">
-												<input id="name" placeholder="Username" name="username" type="text" value="{{ user.username }}" readonly disabled>
+												<input id="name" placeholder="Username" name="username" type="text"
+													   value="{{ user.username }}" readonly disabled>
 											</p>
 											{% else %}
 											<p class="comment-form-author">
-												<input id="name" placeholder="Username" name="username" type="text" value="" disabled>
+												<input id="name" placeholder="Username" name="username" type="text"
+													   value="" disabled>
 												<small>Vous devez être connecté pour commenter.</small>
 											</p>
 											{% endif %}
@@ -117,10 +129,12 @@
 											</p>
 											<p class="col-md-12 col-sm-12 col-xs-12 form-submit">
 												{% if user.is_authenticated %}
-												<button id="submit" type="submit" class="submit btn btn-primary btnhover3 filled">Submit Now<i class="fa fa-angle-right m-l10"></i>
+												<button id="submit" type="submit" class="submit btn btn-primary btnhover3 filled">
+													Submit Now <i class="fa fa-angle-right m-l10"></i>
 												</button>
 												{% else %}
-												<button id="submit" type="button" class="submit btn btn-primary btnhover3 filled" disabled>Submit Now<i class="fa fa-angle-right m-l10"></i>
+												<button id="submit" type="button" class="submit btn btn-primary btnhover3 filled" disabled>
+													Submit Now <i class="fa fa-angle-right m-l10"></i>
 												</button>
 												{% endif %}
 											</p>
@@ -152,5 +166,14 @@
 			</div>
 		</section>
 	</div>
-
+<script>
+	function showReplyForm(commentId) {
+    // Masquer tous les formulaires de réponse
+    document.querySelectorAll('.reply-form').forEach(form => {
+        form.style.display = 'none';
+    });
+    // Afficher le formulaire de réponse correspondant
+    document.getElementById('reply-form-' + commentId).style.display = 'block';
+	}
+</script>
 {% endblock content %}

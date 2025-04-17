@@ -24,13 +24,13 @@ class ArticleAdmin(admin.ModelAdmin):
     raw_id_fields = ('auteur_id', 'livre_associe_id')  # Pour faciliter la sélection si beaucoup d'utilisateurs/livres
     filter_horizontal = ('tag_ids',)  # Interface conviviale pour les tags
 
-# Enregistrement de Commentaire
 @admin.register(Commentaire)
 class CommentaireAdmin(admin.ModelAdmin):
     list_display = ('article', 'get_auteur_username', 'contenu_short', 'statut', 'created_at')
-    list_filter = ('statut', 'created_at', 'article')
+    list_filter = ('statut', 'created_at', 'article', 'auteur_id__username')
     search_fields = ('contenu', 'auteur_id__username')
-    raw_id_fields = ('auteur_id', 'article')  # parent_id n'existe plus dans le modèle
+    raw_id_fields = ('auteur_id', 'article')
+    date_hierarchy = 'created_at'
 
     def contenu_short(self, obj):
         return obj.contenu[:50] + '...' if len(obj.contenu) > 50 else obj.contenu

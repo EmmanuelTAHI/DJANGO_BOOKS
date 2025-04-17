@@ -17,6 +17,9 @@ from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 import json
+from captcha.fields import CaptchaField
+from captcha.helpers import captcha_image_url
+from captcha.models import CaptchaStore
 
 
 # ==============================
@@ -43,7 +46,64 @@ def about(request):
     return render(request, 'e_commerce/about-us.html')
 
 def contact(request):
-    return render(request, 'e_commerce/contact-us.html')
+    if request.method == 'POST':
+        name = request.POST.get('dzName')
+        email = request.POST.get('dzEmail')
+        phone = request.POST.get('dzPhoneNumber')
+        message = request.POST.get('dzMessage')
+
+        user_captcha = request.POST.get('captcha')
+        captcha_hashkey = request.POST.get('captcha_hashkey')
+
+        # Vérifier le CAPTCHA
+        try:
+            captcha_obj = CaptchaStore.objects.get(hashkey=captcha_hashkey)
+            if captcha_obj.response.lower() != user_captcha.lower():
+                messages.error(request, "Code CAPTCHA invalide.")
+                return redirect('e_commerce:contact')
+        except CaptchaStore.DoesNotExist:
+            messages.error(request, "Erreur de validation du CAPTCHA.")
+            return redirect('e_commerce:contact')
+
+        # Créer le contenu de l'e-mail
+        email_subject = f"Nouveau message de contact de {name}"
+        email_body = (
+            f"Nom: {name}\n"
+            f"E-mail: {email}\n"
+            f"Téléphone: {phone}\n\n"
+            f"Message:\n{message}"
+        )
+
+        try:
+            send_mail(
+                subject=email_subject,
+                message=email_body,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
+            )
+            messages.success(request, "Votre message a été envoyé avec succès !")
+            return redirect('e_commerce:contact')
+        except Exception as e:
+            messages.error(request, "Erreur lors de l'envoi de votre message.")
+            print(f"Erreur e-mail: {e}")
+
+    # Génération d’un nouveau CAPTCHA à l’affichage initial
+    new_captcha_key = CaptchaStore.generate_key()
+    captcha_img_url = captcha_image_url(new_captcha_key)
+
+    return render(request, 'e_commerce/contact-us.html', {
+        'captcha_image': captcha_img_url,
+        'captcha_hashkey': new_captcha_key,
+    })
+
+def refresh_captcha(request):
+    new_captcha_key = CaptchaStore.generate_key()
+    captcha_img_url = captcha_image_url(new_captcha_key)
+    return JsonResponse({
+        'captcha_image': captcha_img_url,
+        'captcha_hashkey': new_captcha_key
+    })
 
 def services(request):
     return render(request, 'e_commerce/services.html')

@@ -35,6 +35,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'drf_yasg',
+    'captcha',
+
 ]
 
 
@@ -134,6 +136,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'emmanueltahi14@gmail.com'  # Remplace par ton email
 EMAIL_HOST_PASSWORD = 'srzc woei bgdy vens'
 DEFAULT_FROM_EMAIL = 'emmanueltahi14@gmail.com'
+CONTACT_EMAIL = 'emmanueltahi14@gmail.com'  # E-mail où recevoir les messages
+
+# RECAPTCHA
+
+RECAPTCHA_PUBLIC_KEY = '6LdakRsrAAAAANovdLqiKZJ3z7lndWCIIJP74gCM'
+RECAPTCHA_PRIVATE_KEY = '6LdakRsrAAAAANiCxE_bdqzvXDWFd2lUhlFgCE9z'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

@@ -52,4 +52,7 @@ urlpatterns = [
 
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+
+    # Refresh captcha
+    path('refresh-captcha/', views.refresh_captcha, name='refresh_captcha'),
 ]

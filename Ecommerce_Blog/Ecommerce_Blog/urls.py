@@ -28,6 +28,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),  # URLs pour l'app blog
     path('__reload__/', include('django_browser_reload.urls')),  # Pour le rechargement automatique
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('captcha/', include('captcha.urls')),
 
     # API routes pour chaque application directement
     path('api/e_commerce/', include('e_commerce.urls')),  # Routes API pour l'app e_commerce

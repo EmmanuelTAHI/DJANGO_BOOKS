@@ -84,6 +84,7 @@ class Commentaire(models.Model):
 
     auteur_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="auteur_commentaire_ids")
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="article_commentaire_ids")
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name="replies")
     contenu = models.TextField(max_length=1000)
 
     # Standards
@@ -92,4 +93,12 @@ class Commentaire(models.Model):
     last_updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Commentaire de {self.auteur.username} sur {self.article.titre}"
+        return f"Commentaire de {self.auteur_id.username if self.auteur_id else 'Utilisateur supprimé'} sur {self.article.titre}"
+
+    def can_reply(self, user):
+        if not user.is_authenticated:
+            return False
+        if self.auteur_id == user:
+            # Vérifie si quelqu'un d'autre a répondu
+            return self.replies.exclude(auteur_id=user).exists()
+        return True
